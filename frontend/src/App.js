@@ -1,5 +1,5 @@
 import './App.css';
-import React, {ReactDOM, useState, useEffect} from 'react';
+import React, {ReactDOM, useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import { useHistory } from 'react-router-dom';
@@ -15,8 +15,12 @@ import Dart from './components/Dart';
 
 
 function App() {
+  
+
+
   return (
     <>
+
       <Navbar />
 
       <Routes>
@@ -24,6 +28,7 @@ function App() {
         <Route path='/sort' element={<Sort/>} />
         <Route path='/dart' element={<Dart/>} />
       </Routes>
+
     </>
   );
 }
