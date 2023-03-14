@@ -10,40 +10,40 @@ function Sort (){
   const color_2 = "#C4344F"
   const color_3 = "#1A1A1A"
 
-  const [array, setArray] = useState([]);
-  const [duplicates, setDuplicates] = useState(false);
-  const [arrayLength, setArrayLength] = useState(10);
+  const [array, setArray] = useState([])
+  const [duplicates, setDuplicates] = useState(false)
+  const [arrayLength, setArrayLength] = useState(10)
   const [algorithm, setAlgorithm] = useState('bubbleSort')
   const [speed, setSpeed] = useState(100)
   const [speedName, setSpeedName] = useState('Fast')
   const [buttonBlock, setButtonBlock] = useState(false)
 
   const handleArrayLength = event => {
-    setArrayLength(event.target.value);
+    setArrayLength(event.target.value)
   } 
 
   const handleSpeedChange = event => {
     setSpeed(event.target.value);
     if (event.target.value === "100") {
-      setSpeedName("Fast");
+      setSpeedName("Fast")
     } else if (event.target.value === "500") {
-      setSpeedName("Mid");
+      setSpeedName("Mid")
     } else {
-      setSpeedName("Slow");
+      setSpeedName("Slow")
     }
   }
 
   const handleDuplicates = event => {
-    setDuplicates(event.target.checked);
+    setDuplicates(event.target.checked)
   }
 
   const handleAlgorithmChange = event => {
-    setAlgorithm(event.target.value);
+    setAlgorithm(event.target.value)
   } 
 
   async function fetchData() {
-    const result = await axios.get('http://127.0.0.1:8000/sort', {params: {duplicates: duplicates, length: arrayLength}});
-    setArray(result.data);
+    const result = await axios.get('http://127.0.0.1:8000/sort', {params: {duplicates: duplicates, length: arrayLength}})
+    setArray(result.data)
     for (let i = 0; i < array.length; i++) {
       let bar = document.getElementById(i).style
       bar.backgroundColor = color_3
@@ -79,8 +79,8 @@ function Sort (){
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <div className="App list-group-item block mx-auto" >
