@@ -1,5 +1,5 @@
 //import './App.css';
-import React, {ReactDOM, useState, useEffect} from 'react';
+import React, {ReactDOM, useState, useEffect, Component} from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import { useHistory } from 'react-router-dom';
@@ -12,9 +12,15 @@ const Dart = () => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
-  const [score, setScore] = useState(301)
-  const [multiplier, setMultiplier] = useState(3)
+  const [player1Score, setPlayer1Score] = useState(301)
+  const [player2Score, setPlayer2Score] = useState(301)
+  const [player1Throws, setPlayer1Throws] = useState(3)
+  const [player2Throws, setPlayer2Throws] = useState(3)
+  const [multiplier, setMultiplier] = useState(1)
   const [playerTurn, setPlayerTurn] = useState(1)
+  const [player1Name, setPlayer1Name] = useState("Bob")
+  const [player2Name, setPlayer2Name] = useState("Angie")
+  const [winner, setWinner] = useState(0)
 
   const fetchData = async () => {
     setLoading(true)
@@ -24,32 +30,59 @@ const Dart = () => {
   }
   const handlePoints = (value) => {
     if (value == 25 || value == 50) {
-      setScore(player1.score - value)
+      setPlayer1Score(player1Score - value)
     }
     else{
-    setScore(score - (value * multiplier))
+    setPlayer1Score(player1Score - (value * multiplier))
     }
   }
 
   function handleThrow(value) {
-    const currentPlayer = player1;
+    let currentPlayer 
+    let setScore
+    let throws
+    let setThrows
+    let setOponnentThrows
+    let newScore
 
-  if (value === 25 || value === 50) {
-    currentPlayer.score -= value;
-  } else {
-    currentPlayer.score -= value * multiplier;
-  }
+    if (playerTurn === 1) {
+      currentPlayer = player1Score
+      setScore = setPlayer1Score
+      throws = player1Throws
+      setThrows = setPlayer1Throws
+      setOponnentThrows = setPlayer2Throws
+    } else {
+      currentPlayer = player2Score
+      setScore = setPlayer2Score
+      throws = player2Throws
+      setThrows = setPlayer2Throws
+      setOponnentThrows = setPlayer1Throws
+    }
+    
+    if (value === 25 || value === 50) {
+      newScore = currentPlayer - value
+    } else {
+      newScore = currentPlayer - value * multiplier
+    }
 
-  if (currentPlayer.score < 0) {
-    currentPlayer.score = 0;
-  }
- 
-  // Switch turns
-  setPlayerTurn(playerTurn === 1 ? 2 : 1);
-
-  // Update the score of player one
-  setScore(currentPlayer.score);
-
+    if (newScore > 0){
+      setScore(newScore)
+    } else if( newScore === 0){
+      setScore(newScore)
+      setWinner(playerTurn)
+    }
+    else{
+      setThrows(3)
+      setOponnentThrows(3)
+      setPlayerTurn(playerTurn === 1 ? 2 : 1)
+      return
+    }
+    
+    setThrows(throws - 1)
+    if (throws === 1) {
+      setOponnentThrows(3)
+      setPlayerTurn(playerTurn === 1 ? 2 : 1)
+    }
   }
 
   const points = [
@@ -76,38 +109,8 @@ const Dart = () => {
     { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
   ]
 
-  class Player {
-    constructor(name, score) {
-      this.name = name
-      this.score = score
-      this.throws = 3
-      this.average = 0
-    }
-    updateScore(value){
-      this.score = this.score - value
-    }
-  }
-
-  class Match {
-    constructor(players) {
-      this.players = players
-      this.rounds = 0
-      this.sets = 0
-      this.legs = 0
-    }
-
-  }
-
-  const player1 = new Player("John", 201)
-  const player2 = new Player("Jane", 301)
-
-  const match = new Match([player1, player2])
-
-  player2.updateScore(2)
-
   return (
     <>
-
       <div>
         <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
       </div>
@@ -119,14 +122,14 @@ const Dart = () => {
 
       <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
-        onClick={() => {}}>New game</button>
+        onClick={() => handleThrow(1)}>New game</button>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => {}}>Undo</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(1)}>x1</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(2)}>x2</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 3 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 3 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(3)}>x3</button>
       </div>
       <div className="border-2 border-[#1f1f1f] rounded-xl mx-5 lg:mx-16"></div>
@@ -136,7 +139,7 @@ const Dart = () => {
           <button
             key={button.label}
             className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium ${button.color}`}
-            onClick={() => handlePoints(button.value)}
+            onClick={() => handleThrow(button.value)}
           >
             {button.label}
           </button>
@@ -144,17 +147,17 @@ const Dart = () => {
         <div></div><div className="block md:hidden lg:block"></div>
         <div className="hidden lg:block"></div><div className="hidden lg:block"></div>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#22d3ee]"
-        onClick={() => handlePoints(25)}>25</button>
+        onClick={() => handleThrow(25)}>25</button>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
-        onClick={() => handlePoints(50)}>50</button>
+        onClick={() => handleThrow(50)}>50</button>
       </div>
 
 
       <div className="py-12 grid grid-cols-2 place-items-center justify-between lg:grid-cols-4 gap-x-2 gap-y-4">
-          <div className="h-24 w-48 relative bg-[#1A1A1A]">
+          <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              {player2.name}<br/>
-              Score: {player1.score}
+              {player1Name}<br/>
+              Score: {player1Score}
             </div>
           </div>
           <div className="h-24 w-48 relative bg-[#1A1A1A]">
@@ -162,15 +165,15 @@ const Dart = () => {
               Throws
             </div>
             <div className="flex justify-between">
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1.throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1.throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1.throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
             </div>
           </div> 
-          <div className="h-24 w-48 relative bg-[#1A1A1A]">
+          <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              {player2.name}<br/>
-              Score: {player2.score}
+              {player2Name}<br/>
+              Score: {player2Score}
             </div>
           </div>
           <div className="h-24 w-48 relative bg-[#1A1A1A]">
@@ -178,9 +181,9 @@ const Dart = () => {
               Throws
             </div>
             <div className="flex justify-between">
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2.throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2.throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2.throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
             </div>
           </div>
       </div>
