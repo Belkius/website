@@ -14,6 +14,7 @@ const Dart = () => {
   const [loading, setLoading] = useState(false)
   const [score, setScore] = useState(301)
   const [multiplier, setMultiplier] = useState(3)
+  const [playerTurn, setPlayerTurn] = useState(1)
 
   const fetchData = async () => {
     setLoading(true)
@@ -23,11 +24,32 @@ const Dart = () => {
   }
   const handlePoints = (value) => {
     if (value == 25 || value == 50) {
-      setScore(score - value)
+      setScore(player1.score - value)
     }
     else{
     setScore(score - (value * multiplier))
     }
+  }
+
+  function handleThrow(value) {
+    const currentPlayer = player1;
+
+  if (value === 25 || value === 50) {
+    currentPlayer.score -= value;
+  } else {
+    currentPlayer.score -= value * multiplier;
+  }
+
+  if (currentPlayer.score < 0) {
+    currentPlayer.score = 0;
+  }
+ 
+  // Switch turns
+  setPlayerTurn(playerTurn === 1 ? 2 : 1);
+
+  // Update the score of player one
+  setScore(currentPlayer.score);
+
   }
 
   const points = [
@@ -61,6 +83,9 @@ const Dart = () => {
       this.throws = 3
       this.average = 0
     }
+    updateScore(value){
+      this.score = this.score - value
+    }
   }
 
   class Match {
@@ -78,7 +103,7 @@ const Dart = () => {
 
   const match = new Match([player1, player2])
 
-  player2.throws = 2
+  player2.updateScore(2)
 
   return (
     <>
@@ -86,22 +111,27 @@ const Dart = () => {
       <div>
         <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
       </div>
+{/*
       <div>
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">Play | Leaderboard</h2>
       </div>
-      
-      <div className="grid grid-cols-4 place-items-center justify-between gap-4 mx-10 my-4">
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#22d3ee]"
-        onClick={() => setMultiplier(1)}>x1</button>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#22d3ee]"
-        onClick={() => setMultiplier(2)}>x2</button>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#22d3ee]"
-        onClick={() => setMultiplier(3)}>x3</button>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
-        onClick={() => {}}>undo</button>
-      </div>
+*/}
 
-      <div className="grid grid-cols-5 place-items-center justify-evenly md:grid-cols-6 lg:grid-cols-9 gap-4 mx-10">
+      <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
+        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
+        onClick={() => {}}>New game</button>
+        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
+        onClick={() => {}}>Undo</button>
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        onClick={() => setMultiplier(1)}>x1</button>
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        onClick={() => setMultiplier(2)}>x2</button>
+        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#22d3ee] ${multiplier === 3 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        onClick={() => setMultiplier(3)}>x3</button>
+      </div>
+      <div className="border-2 border-[#1f1f1f] rounded-xl mx-5 lg:mx-16"></div>
+
+      <div className="grid grid-cols-5 place-items-center justify-evenly md:grid-cols-6 lg:grid-cols-9 gap-4 mx-10 my-4">
         {points.map((button) => (
           <button
             key={button.label}
