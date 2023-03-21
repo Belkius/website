@@ -14,6 +14,8 @@ const Dart = () => {
   const [loading, setLoading] = useState(false)
   const [player1Score, setPlayer1Score] = useState(301)
   const [player2Score, setPlayer2Score] = useState(301)
+  const [player1Points, setPlayer1Points] = useState([])
+  const [player2Points, setPlayer2Points] = useState([])
   const [player1Throws, setPlayer1Throws] = useState(3)
   const [player2Throws, setPlayer2Throws] = useState(3)
   const [multiplier, setMultiplier] = useState(1)
@@ -44,6 +46,7 @@ const Dart = () => {
     let setThrows
     let setOponnentThrows
     let newScore
+    let setPoints
 
     if (playerTurn === 1) {
       currentPlayer = player1Score
@@ -51,18 +54,26 @@ const Dart = () => {
       throws = player1Throws
       setThrows = setPlayer1Throws
       setOponnentThrows = setPlayer2Throws
+      setPoints = setPlayer1Points
     } else {
       currentPlayer = player2Score
       setScore = setPlayer2Score
       throws = player2Throws
       setThrows = setPlayer2Throws
       setOponnentThrows = setPlayer1Throws
+      setPoints = setPlayer2Points
     }
     
     if (value === 25 || value === 50) {
       newScore = currentPlayer - value
     } else {
       newScore = currentPlayer - value * multiplier
+    }
+
+    if (value === 25 || value === 50) {
+      setPoints(allThrows => [...allThrows, value])
+    } else {
+      setPoints(allThrows => [...allThrows, value * multiplier])
     }
 
     if (newScore > 0){
@@ -83,6 +94,13 @@ const Dart = () => {
       setOponnentThrows(3)
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
     }
+  }
+
+  function undo(){
+    if (playerTurn === 1){
+      setPlayer1Points(player1Points.slice(0, player1Points.length - 1))
+    } else
+    setPlayer2Points(player2Points.slice(0, player2Points.length - 1))
   }
 
   const points = [
@@ -119,12 +137,16 @@ const Dart = () => {
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">Play | Leaderboard</h2>
       </div>
 */}
+      <div>
+        <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player1Points}</h2>
+        <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player2Points}</h2>
+      </div>
 
       <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => handleThrow(1)}>New game</button>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
-        onClick={() => {}}>Undo</button>
+        onClick={() => undo()}>Undo</button>
         <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(1)}>x1</button>
         <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
@@ -142,6 +164,7 @@ const Dart = () => {
             onClick={() => handleThrow(button.value)}
           >
             {button.label}
+            
           </button>
         ))}
         <div></div><div className="block md:hidden lg:block"></div>
