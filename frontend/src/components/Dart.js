@@ -97,10 +97,26 @@ const Dart = () => {
   }
 
   function undo(){
-    if (playerTurn === 1){
+    let updatedPlayerTurn = playerTurn
+    if (player1Points.length ===0 && player2Points.length === 0) return
+    if (playerTurn === 1 && player1Throws === 3){
+      updatedPlayerTurn = 2
+      setPlayerTurn(2)
+      setPlayer2Throws(1)
+    }
+    else if(playerTurn === 2 && player2Throws === 3){
+      updatedPlayerTurn = 1
+      setPlayerTurn(1)
+      setPlayer1Throws(1)
+    }
+    if (updatedPlayerTurn === 1){
+      if (player1Throws < 3) setPlayer1Throws(player1Throws + 1)
       setPlayer1Points(player1Points.slice(0, player1Points.length - 1))
-    } else
-    setPlayer2Points(player2Points.slice(0, player2Points.length - 1))
+    } 
+    else if (updatedPlayerTurn === 2) {
+      if (player2Throws < 3) setPlayer2Throws(player2Throws + 1)
+      setPlayer2Points(player2Points.slice(0, player2Points.length - 1))
+    }
   }
 
   const points = [
