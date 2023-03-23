@@ -1,9 +1,8 @@
-//import './App.css';
 import React, {ReactDOM, useState, useEffect, Component} from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import { useHistory } from 'react-router-dom';
-
+import NewGameWindow from './DartComponents';
 
 
 
@@ -12,6 +11,7 @@ const Dart = () => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
+  const [showNewGame, setShowNewGame] = useState(false)
   const [player1Score, setPlayer1Score] = useState(301)
   const [player2Score, setPlayer2Score] = useState(301)
   const [player1Points, setPlayer1Points] = useState([])
@@ -20,8 +20,8 @@ const Dart = () => {
   const [player2Throws, setPlayer2Throws] = useState(3)
   const [multiplier, setMultiplier] = useState(1)
   const [playerTurn, setPlayerTurn] = useState(1)
-  const [player1Name, setPlayer1Name] = useState("Bob")
-  const [player2Name, setPlayer2Name] = useState("Angie")
+  const [player1Name, setPlayer1Name] = useState("Player 1")
+  const [player2Name, setPlayer2Name] = useState("Player 2")
   const [winner, setWinner] = useState(0)
 
   const fetchData = async () => {
@@ -40,13 +40,7 @@ const Dart = () => {
   }
 
   function handleThrow(value) {
-    let currentPlayer 
-    let setScore
-    let throws
-    let setThrows
-    let setOponnentThrows
-    let newScore
-    let setPoints
+    let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints
 
     if (playerTurn === 1) {
       currentPlayer = player1Score
@@ -142,7 +136,26 @@ const Dart = () => {
     { label: '1', value: 1, color: "bg-[#22d3ee]" },
     { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
   ]
+  const handleStart = () => {
+    const selectElement = document.getElementById('selectGamePoints')
+    const input1Element = document.getElementById('inputPlayer1Name')
+    const input2Element = document.getElementById('inputPlayer2Name')
+    const newGameData = {
+      gameLength: selectElement.value,
+      player1Name: input1Element.value,
+      player2Name: input2Element.value
+    }
+    setPlayer1Score(Number(selectElement.value))
+    setPlayer2Score(Number(selectElement.value))
+    setPlayer1Name(input1Element.value)
+    setPlayer2Name(input2Element.value)
+    setShowNewGame(false)
+  }
 
+  const handleCancel = () => {
+    console.log('Cancelled')
+    setShowNewGame(false)
+  }
   return (
     <>
       <div>
@@ -160,7 +173,7 @@ const Dart = () => {
 
       <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
-        onClick={() => handleThrow(1)}>New game</button>
+        onClick={() => setShowNewGame(true)}>New game</button>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => undo()}>Undo</button>
         <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
@@ -225,6 +238,16 @@ const Dart = () => {
               <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
             </div>
           </div>
+      </div>
+
+      {/* new game popup */}
+      <div className="flex justify-center items-center ">
+       <NewGameWindow
+          show={showNewGame}
+          title="New Game"
+          onStart={handleStart}
+          onCancel={handleCancel}
+        />
       </div>
     </>
   );
