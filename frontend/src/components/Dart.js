@@ -101,7 +101,7 @@ const Dart = () => {
     if (newScore > 1){
       setScore(newScore)
     } 
-    else if( newScore === 0){
+    else if( newScore === 0 && multiplier === 2){
       setScore(newScore)
       if (playerTurn === 1) setWinner(player1Name)
       if (playerTurn === 2) setWinner(player2Name)
