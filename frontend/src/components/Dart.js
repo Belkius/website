@@ -2,7 +2,7 @@ import React, {ReactDOM, useState, useEffect, Component} from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import { useHistory } from 'react-router-dom';
-import NewGameWindow from './DartComponents';
+import  { NewGameWindow, WinGameWindow } from './DartComponents';
 
 
 
@@ -12,6 +12,7 @@ const Dart = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [showNewGame, setShowNewGame] = useState(false)
+  const [showWonGame, setShowWonGame] = useState(false)
   const [player1Score, setPlayer1Score] = useState(301)
   const [player2Score, setPlayer2Score] = useState(301)
   const [player1Points, setPlayer1Points] = useState([])
@@ -22,7 +23,31 @@ const Dart = () => {
   const [playerTurn, setPlayerTurn] = useState(1)
   const [player1Name, setPlayer1Name] = useState("Player 1")
   const [player2Name, setPlayer2Name] = useState("Player 2")
-  const [winner, setWinner] = useState(0)
+  const [winner, setWinner] = useState("")
+
+  const points = [
+    { label: '20', value: 20, color: "bg-[#C4344F]" },
+    { label: '19', value: 19, color: "bg-[#22d3ee]" },
+    { label: '18', value: 18, color: "bg-[#C4344F]" },
+    { label: '17', value: 17, color: "bg-[#22d3ee]" },
+    { label: '16', value: 16, color: "bg-[#C4344F]" },
+    { label: '15', value: 15, color: "bg-[#22d3ee]" },
+    { label: '14', value: 14, color: "bg-[#C4344F]" },
+    { label: '13', value: 13, color: "bg-[#22d3ee]" },
+    { label: '12', value: 12, color: "bg-[#C4344F]" },
+    { label: '11', value: 11, color: "bg-[#22d3ee]" },
+    { label: '10', value: 10, color: "bg-[#C4344F]" },
+    { label: '9', value: 9, color: "bg-[#22d3ee]" },
+    { label: '8', value: 8, color: "bg-[#C4344F]" },
+    { label: '7', value: 7, color: "bg-[#22d3ee]" },
+    { label: '6', value: 6, color: "bg-[#C4344F]" },
+    { label: '5', value: 5, color: "bg-[#22d3ee]" },
+    { label: '4', value: 4, color: "bg-[#C4344F]" },
+    { label: '3', value: 3, color: "bg-[#22d3ee]" },
+    { label: '2', value: 2, color: "bg-[#C4344F]" },
+    { label: '1', value: 1, color: "bg-[#22d3ee]" },
+    { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
+  ]
 
   const fetchData = async () => {
     setLoading(true)
@@ -34,7 +59,7 @@ const Dart = () => {
     if (value == 25 || value == 50) {
       setPlayer1Score(player1Score - value)
     }
-    else{
+    else {
     setPlayer1Score(player1Score - (value * multiplier))
     }
   }
@@ -49,7 +74,8 @@ const Dart = () => {
       setThrows = setPlayer1Throws
       setOponnentThrows = setPlayer2Throws
       setPoints = setPlayer1Points
-    } else {
+    } 
+    else {
       currentPlayer = player2Score
       setScore = setPlayer2Score
       throws = player2Throws
@@ -60,24 +86,29 @@ const Dart = () => {
     
     if (value === 25 || value === 50) {
       newScore = currentPlayer - value
-    } else {
+    } 
+    else {
       newScore = currentPlayer - value * multiplier
     }
 
     if (value === 25 || value === 50) {
-      setPoints(allThrows => [...allThrows, value])
-    } else {
-      setPoints(allThrows => [...allThrows, value * multiplier])
+      setPoints(playerPoints => [...playerPoints, value])
+    } 
+    else {
+      setPoints(playerPoints => [...playerPoints, value * multiplier])
     }
 
-    if (newScore > 0){
+    if (newScore > 1){
       setScore(newScore)
-    } else if( newScore === 0){
+    } 
+    else if( newScore === 0){
       setScore(newScore)
-      setWinner(playerTurn)
+      if (playerTurn === 1) setWinner(player1Name)
+      if (playerTurn === 2) setWinner(player2Name)
+      setShowWonGame(true)
     }
     else{
-      setThrows(3)
+      setThrows(0)
       setOponnentThrows(3)
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
       return
@@ -105,57 +136,40 @@ const Dart = () => {
     }
     if (updatedPlayerTurn === 1){
       if (player1Throws < 3) setPlayer1Throws(player1Throws + 1)
+      setPlayer1Score(player1Score + player1Points[player1Points.length - 1])
       setPlayer1Points(player1Points.slice(0, player1Points.length - 1))
     } 
     else if (updatedPlayerTurn === 2) {
       if (player2Throws < 3) setPlayer2Throws(player2Throws + 1)
+      setPlayer2Score(player2Score + player2Points[player2Points.length - 1])
       setPlayer2Points(player2Points.slice(0, player2Points.length - 1))
     }
   }
 
-  const points = [
-    { label: '20', value: 20, color: "bg-[#C4344F]" },
-    { label: '19', value: 19, color: "bg-[#22d3ee]" },
-    { label: '18', value: 18, color: "bg-[#C4344F]" },
-    { label: '17', value: 17, color: "bg-[#22d3ee]" },
-    { label: '16', value: 16, color: "bg-[#C4344F]" },
-    { label: '15', value: 15, color: "bg-[#22d3ee]" },
-    { label: '14', value: 14, color: "bg-[#C4344F]" },
-    { label: '13', value: 13, color: "bg-[#22d3ee]" },
-    { label: '12', value: 12, color: "bg-[#C4344F]" },
-    { label: '11', value: 11, color: "bg-[#22d3ee]" },
-    { label: '10', value: 10, color: "bg-[#C4344F]" },
-    { label: '9', value: 9, color: "bg-[#22d3ee]" },
-    { label: '8', value: 8, color: "bg-[#C4344F]" },
-    { label: '7', value: 7, color: "bg-[#22d3ee]" },
-    { label: '6', value: 6, color: "bg-[#C4344F]" },
-    { label: '5', value: 5, color: "bg-[#22d3ee]" },
-    { label: '4', value: 4, color: "bg-[#C4344F]" },
-    { label: '3', value: 3, color: "bg-[#22d3ee]" },
-    { label: '2', value: 2, color: "bg-[#C4344F]" },
-    { label: '1', value: 1, color: "bg-[#22d3ee]" },
-    { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
-  ]
   const handleStart = () => {
     const selectElement = document.getElementById('selectGamePoints')
     const input1Element = document.getElementById('inputPlayer1Name')
     const input2Element = document.getElementById('inputPlayer2Name')
-    const newGameData = {
-      gameLength: selectElement.value,
-      player1Name: input1Element.value,
-      player2Name: input2Element.value
+    if (input1Element.value) {
+      setPlayer1Name(input1Element.value)
+    }if (input1Element.value) {
+      setPlayer2Name(input2Element.value)
     }
     setPlayer1Score(Number(selectElement.value))
     setPlayer2Score(Number(selectElement.value))
-    setPlayer1Name(input1Element.value)
-    setPlayer2Name(input2Element.value)
+    setPlayer1Points([])
+    setPlayer2Points([])
+    setPlayer1Throws(3)
+    setPlayer2Throws(3)
     setShowNewGame(false)
   }
 
   const handleCancel = () => {
     console.log('Cancelled')
     setShowNewGame(false)
+    setShowWonGame(false)
   }
+
   return (
     <>
       <div>
@@ -246,6 +260,15 @@ const Dart = () => {
           show={showNewGame}
           title="New Game"
           onStart={handleStart}
+          onCancel={handleCancel}
+        />
+      </div>
+      
+      {/* winning game popup */}
+      <div className="flex justify-center items-center ">
+       <WinGameWindow
+          show={showWonGame}
+          winner={winner}
           onCancel={handleCancel}
         />
       </div>

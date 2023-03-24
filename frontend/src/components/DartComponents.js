@@ -5,21 +5,16 @@ function NewGameWindow(props) {
     <div className={`${props.show ? 'fixed' : 'hidden'} inset-0 w-full h-full flex justify-center items-center`}>
       <div className="fixed inset-0 blur-3xl opacity-60 bg-[#1f1f1f]"></div>
       <div className="bg-black rounded-lg p-8 max-w-md w-full mx-4 z-50">
-        <div className="text-white text-lg font-medium mb-4">{props.title}</div>
+        <div className="text-white text-2xl font-bold mb-4">{props.title}</div>
         <div className="text-white mb-4">
-          <label className="block font-bold mb-2" htmlFor="option-select">
-            Select game length:
+          <label className="block font-bold mb-2">
+            Select starting points:
           </label>
           <select
             className="block appearance-none w-full bg-[#1f1f1f]   py-2 px-4 pr-8 rounded  focus:outline-none"
             id="selectGamePoints"
             value={props.player1Score}  
-            onChange={(e) => {
-              props.setPlayer1Score(e.target.value)
-              props.setPlayer2Score(e.target.value)
-            }}
           >
-            <option value = '301'>Points to win</option>
             <option value = '301'>301</option>
             <option value = '501'>501</option>
             <option value = '701'>701</option>
@@ -27,7 +22,7 @@ function NewGameWindow(props) {
           </select>
         </div>
         <div className="text-white mb-4">
-          <label className="block font-bold mb-2" htmlFor="input1">
+          <label className="block font-bold mb-2">
             Player 1 name:
           </label>
           <input
@@ -35,11 +30,11 @@ function NewGameWindow(props) {
             id="inputPlayer1Name"
             type="text"
             value={props.player1Name}
-            onChange={(e) => props.setPlayer1Name(e.target.value)}
+            maxLength="10"
           />
         </div>
         <div className="text-white mb-4">
-          <label className="block font-bold mb-2" htmlFor="input1">
+          <label className="block font-bold mb-2">
             Player 2 name:
           </label>
           <input
@@ -47,7 +42,7 @@ function NewGameWindow(props) {
             id="inputPlayer2Name"
             type="text"
             value={props.player2Name}
-            onChange={(e) => props.setPlayer2Name(e.target.value)}
+            maxLength="10"
           />
         </div>
         <div className="mt-8 flex justify-end">
@@ -59,4 +54,18 @@ function NewGameWindow(props) {
   );
 }
 
-export default NewGameWindow;
+function WinGameWindow(props) {
+  return (
+    <div className={`${props.show ? 'fixed' : 'hidden'} inset-0 w-full h-full flex justify-center items-center`}>
+      <div className="fixed inset-0 blur-3xl opacity-60 bg-[#1f1f1f]"></div>
+      <div className="bg-black rounded-lg p-8 max-w-md w-full mx-4 z-50 ">
+        <div className="text-white text-2xl font-bold mb-4 ">Congratulations! {props.winner} won!</div>
+        <div className="mt-8 flex justify-end">
+          <button className="bg-[#C4344F] text-white font-bold py-2 px-4 rounded" onClick={props.onCancel}>Tanks!</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export { NewGameWindow, WinGameWindow };
