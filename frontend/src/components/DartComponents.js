@@ -68,4 +68,4 @@ function WinGameWindow(props) {
   );
 }
 
-export { NewGameWindow, WinGameWindow };
+export { NewGameWindow, WinGameWindow }

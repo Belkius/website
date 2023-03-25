@@ -2,6 +2,8 @@ import React, {ReactDOM, useState, useEffect} from 'react';
 import axios from 'axios';
 import {render} from 'react-dom';
 import { useHistory } from 'react-router-dom';
+import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js';
+
 
 
 function Sort (){
@@ -50,32 +52,34 @@ function Sort (){
     }
   }
   async function sortData() {
+    setButtonBlock(true)
+
     if (algorithm === "bubbleSort"){
-      bubbleSort();
+      await bubbleSort(array, setArray, speed)
     }
     else if (algorithm === "selectionSort"){
-      selectionSort();
+      await selectionSort(array, setArray, speed)
     }
     else if (algorithm === "quickSort"){
-      await quickSort(array, 0, array.length - 1);
-      finishedAnimation();
+      await quickSort(array, 0, array.length - 1, array, setArray, speed)
     }
     else if (algorithm === "heapSort"){
-      heapSort(array);
+      await heapSort(array, setArray, speed)
     }
     else if (algorithm === "insertionSort"){
-      insertionSort();
+      await insertionSort(array, setArray, speed)
     }
     else if (algorithm === "mergeSort"){
-      await mergeSort(0, arrayLength);
-      finishedAnimation();
+      await mergeSort(0, arrayLength, array, setArray, speed);
     }
     else if (algorithm === "shellSort"){
-      shellSort();
+      await shellSort(array, setArray, arrayLength, speed)
     }
     else if (algorithm === "pancakeSort"){
-      pancakeSort();
+      await pancakeSort(array, setArray, arrayLength, speed)
     }
+    
+    await finishedAnimation(array, setButtonBlock)
   }
 
   useEffect(() => {
@@ -135,313 +139,6 @@ function Sort (){
           })}
       </div>        
     </div>
-  );
-
-  //SORTING ANIMATIONS
- 
-  function sleep(milliSeconds){
-    return new Promise((resolve) => setTimeout(resolve, milliSeconds))
-  }
-  
-  async function finishedAnimation(){
-    for (let i = 0; i < array.length; i++) {
-      let bar = document.getElementById(i).style
-      bar.backgroundColor = "#22d3ee"
-      await sleep(50)
-    }
-    for (let i = 0; i < array.length; i++) {
-      let bar = document.getElementById(i).style
-      bar.backgroundColor = color_2
-      await sleep(50)
-    }
-    for (let i = 0; i < array.length; i++) {
-      let bar = document.getElementById(i).style
-      bar.backgroundColor = '#1A1A1A'
-      await sleep(50)
-    }
-    setButtonBlock(false)
-  }
-
-  async function swap(array, left, right){
-    let temp = array[left]
-    array[left] = array[right]
-    array[right] = temp
-  }
-
-  // SELECTION SORT
-  async function selectionSort (){
-    setButtonBlock(true)
-
-    for (let i = 0; i < array.length - 1; i++) {
-      let minimum = i
-      for (let j = i + 1; j < array.length; j++) {
-        if (array[j] < array[minimum]) {
-          minimum = j
-        }
-      }
-          if (minimum !== i) {
-            swap(array, i, minimum)
-            setArray([...array])
-      
-            document.getElementById(minimum).style.backgroundColor = '#22d3ee'
-            document.getElementById(i).style.backgroundColor = '#C4344F'
-            await sleep(speed)
-            document.getElementById(minimum).style.backgroundColor = color_3
-            document.getElementById(i).style.backgroundColor = color_3
-      }
-    }
-    await finishedAnimation()
-  }
-
-  // BUBBLE SORT
-  async function bubbleSort(){
-    setButtonBlock(true)
-
-    for (let i = 0; i < array.length - 1; i++) {
-      for (let j = 0; j < array.length - i - 1; j++) {
-        if (array[j] > array[j + 1]) {
-          swap(array, j, j + 1)
-          setArray([...array])
-
-          document.getElementById(j).style.backgroundColor = '#22d3ee'
-          document.getElementById(j + 1).style.backgroundColor = '#C4344F'
-          await sleep(speed)
-          document.getElementById(j).style.backgroundColor = color_3
-          document.getElementById(j + 1).style.backgroundColor = color_3
-        }
-      }
-    }
-    await finishedAnimation()
-  }
-
-  // QUICK SORT
-  async function quickSort(currentArr, low, high) {
-    setButtonBlock(true);
-
-    if (low < high){
-      let pivot = currentArr[high]
-      let pointer = low - 1
-      
-      await sleep(speed)
-      document.getElementById(high).style.backgroundColor = '#22d3ee'
-
-      for (let i = low; i < high; i++) {          
-        document.getElementById(i).style.backgroundColor = '#C4344F'
-          if (currentArr[i] <= pivot){
-            pointer = pointer + 1;
-            swap(currentArr, pointer, i)
-            setArray([...array])
-          }
-          await sleep(speed)
-          document.getElementById(i).style.backgroundColor = color_3
-        }
-          swap(currentArr, pointer + 1, high)
-          setArray([...array])
-          
-          await sleep(speed)
-          document.getElementById(high).style.backgroundColor = color_3
-          await quickSort(currentArr, low, pointer)
-          await quickSort(currentArr, pointer + 2, high)          
-    }
-  }
-
-  // HEAP SORT
-  async function heapSort() {
-    setButtonBlock(true)
-    let length = array.length
-
-    for (let index = Math.floor(length / 2) - 1; index >= 0; index--) {
-      await heapify(length, index)
-    }
-
-    for (let index = length - 1; index >= 0; index--) {
-      swap(array, 0, index)
-      setArray([...array])
-      document.getElementById(0).style.backgroundColor = '#22d3ee'
-      await sleep(speed)
-      document.getElementById(index).style.backgroundColor = color_3
-      document.getElementById(0).style.backgroundColor = color_3
-      
-      await heapify(index, 0)
-    }
-    await finishedAnimation()
-  }
-
-  async function heapify(length, index) {
-    let largest = index
-    let left = 2 * index + 1
-    let right = 2 * index + 2
-    
-    if (left < length && array[left] > array[largest]) {
-      largest = left
-    }
-
-    if (right < length && array[right] > array[largest]) {
-      largest = right
-    }
-    
-    if (largest !== index) {
-      swap(array, index, largest)
-      setArray([...array])
-      
-      document.getElementById(largest).style.backgroundColor = '#C4344F'
-      document.getElementById(index).style.backgroundColor = '#22d3ee'
-      await sleep(speed)
-      document.getElementById(largest).style.backgroundColor = color_3
-      document.getElementById(index).style.backgroundColor = color_3
-
-      await heapify(length, largest)
-    }
-  }
-
-  //INSERTION SORT
-  async function insertionSort() {
-    setButtonBlock(true)
-
-    for (let i = 1; i < array.length; i++) {
-      let pointer = array[i]
-      let j = i - 1
-      while (j >= 0 && array[j] > pointer) {
-        swap(array, j, j + 1)
-        setArray([...array])
-
-        document.getElementById(j + 1).style.backgroundColor = '#C4344F'
-        document.getElementById(j).style.backgroundColor = '#22d3ee'
-        await sleep(speed);
-        document.getElementById(j + 1).style.backgroundColor = color_3
-        document.getElementById(j).style.backgroundColor = color_3
-
-        j--
-      }
-    }
-    await finishedAnimation()
-  }
-
-  // MERGE SORT
-  async function mergeSort(low, high) {
-    setButtonBlock(true)
-
-    if (low < high) {
-      const mid = Math.floor((low + high) / 2)
-  
-      await mergeSort(low, mid)
-      await mergeSort(mid + 1, high)
-  
-      const leftArray = array.slice(low, mid + 1)
-      const rightArray = array.slice(mid + 1, high + 1)
-  
-      let i = 0
-      let j = 0
-      let k = low
-  
-      while (i < leftArray.length && j < rightArray.length) {
-        if (leftArray[i] <= rightArray[j]) {
-          array[k] = leftArray[i]
-          i++
-        } else {
-          array[k] = rightArray[j]
-          j++
-        }
-        setArray([...array])
-
-        document.getElementById(k).style.backgroundColor = '#C4344F'
-        await sleep(speed);
-        document.getElementById(k).style.backgroundColor = color_3
-        
-        k++
-      }
-  
-      while (i < leftArray.length) {
-        array[k] = leftArray[i]
-        setArray([...array])
-            
-        i++
-        k++
-      }
-    }
-  }
-
-  // SHELL SORT
-  async function shellSort() {
-    setButtonBlock(true)
-  
-    let sequence = Math.floor(arrayLength / 2)
-  
-    while (sequence > 0) {
-      for (let i = sequence; i < arrayLength; i++) {
-        let key = array[i]
-        let j = i
-  
-        while (j >= sequence && array[j - sequence] > key) {
-          swap(array, j, j - sequence)
-          setArray([...array])
-  
-          document.getElementById(j).style.backgroundColor = '#C4344F'
-          document.getElementById(j - sequence).style.backgroundColor = '#22d3ee'
-          await sleep(speed)
-          document.getElementById(j).style.backgroundColor = color_3
-          document.getElementById(j - sequence).style.backgroundColor = color_3
-  
-          j = j - sequence
-        }
-      }
-      sequence = Math.floor(sequence / 2)
-    }
-  
-    await finishedAnimation()
-  }
-  
-  // PANCAKE SORT
-  async function flip(array, index) {
-    let x = Math.ceil(index / 2)
-
-    for (let i = 0; i < x ; i++) {
-      document.getElementById(i).style.backgroundColor = '#C4344F'
-      document.getElementById(index - i).style.backgroundColor = '#22d3ee'
-    }
-    
-    await sleep(speed * 2)
-
-    for (let i = 0; i < x ; i++) {
-      swap(array, i, index - i)
-      setArray([...array])
-      x--
-    }
-
-    for (let i = 0; i < index ; i++) {
-      document.getElementById(i).style.backgroundColor = color_3
-      document.getElementById(index - i).style.backgroundColor = color_3
-    }
-    
-    await sleep(speed)
-  }
-  
-  async function searchMax(array, length) {
-    let max = 0
-    for (let i = 1; i < length; i++) {
-      if (array[max] < array[i]) {
-        max = i
-      }
-    }
-    return max
-  }
-  
-  async function pancakeSort() {
-    setButtonBlock(true)
-
-    let max = 0
-    for (let i = arrayLength; i > 1; i--){
-      max = await searchMax(array, i)
-      if (max != i - 1) {
-        await flip(array, max)
-        await flip(array, i - 1)
-            
-        for (let j = i - 1; j < arrayLength ; j++) {
-          document.getElementById(j).style.backgroundColor = color_3
-        }
-      }     
-    }
-    await finishedAnimation();
-  }
+  )
 }
 export default Sort;

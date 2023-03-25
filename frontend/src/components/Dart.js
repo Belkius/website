@@ -1,16 +1,12 @@
-import React, {ReactDOM, useState, useEffect, Component} from 'react';
+import React, {useState, Component} from 'react';
 import axios from 'axios';
-import {render} from 'react-dom';
-import { useHistory } from 'react-router-dom';
 import  { NewGameWindow, WinGameWindow } from './DartComponents';
 
 
 
 
-const Dart = () => {
+function Dart() {
 
-  const [data, setData] = useState([])
-  const [loading, setLoading] = useState(false)
   const [showNewGame, setShowNewGame] = useState(false)
   const [showWonGame, setShowWonGame] = useState(false)
   const [player1Score, setPlayer1Score] = useState(301)
@@ -27,42 +23,27 @@ const Dart = () => {
 
   const points = [
     { label: '20', value: 20, color: "bg-[#C4344F]" },
-    { label: '19', value: 19, color: "bg-[#22d3ee]" },
+    { label: '19', value: 19, color: "bg-[#09a9c9]" },
     { label: '18', value: 18, color: "bg-[#C4344F]" },
-    { label: '17', value: 17, color: "bg-[#22d3ee]" },
+    { label: '17', value: 17, color: "bg-[#09a9c9]" },
     { label: '16', value: 16, color: "bg-[#C4344F]" },
-    { label: '15', value: 15, color: "bg-[#22d3ee]" },
+    { label: '15', value: 15, color: "bg-[#09a9c9]" },
     { label: '14', value: 14, color: "bg-[#C4344F]" },
-    { label: '13', value: 13, color: "bg-[#22d3ee]" },
+    { label: '13', value: 13, color: "bg-[#09a9c9]" },
     { label: '12', value: 12, color: "bg-[#C4344F]" },
-    { label: '11', value: 11, color: "bg-[#22d3ee]" },
+    { label: '11', value: 11, color: "bg-[#09a9c9]" },
     { label: '10', value: 10, color: "bg-[#C4344F]" },
-    { label: '9', value: 9, color: "bg-[#22d3ee]" },
+    { label: '9', value: 9, color: "bg-[#09a9c9]" },
     { label: '8', value: 8, color: "bg-[#C4344F]" },
-    { label: '7', value: 7, color: "bg-[#22d3ee]" },
+    { label: '7', value: 7, color: "bg-[#09a9c9]" },
     { label: '6', value: 6, color: "bg-[#C4344F]" },
-    { label: '5', value: 5, color: "bg-[#22d3ee]" },
+    { label: '5', value: 5, color: "bg-[#09a9c9]" },
     { label: '4', value: 4, color: "bg-[#C4344F]" },
-    { label: '3', value: 3, color: "bg-[#22d3ee]" },
+    { label: '3', value: 3, color: "bg-[#09a9c9]" },
     { label: '2', value: 2, color: "bg-[#C4344F]" },
-    { label: '1', value: 1, color: "bg-[#22d3ee]" },
+    { label: '1', value: 1, color: "bg-[#09a9c9]" },
     { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
   ]
-
-  const fetchData = async () => {
-    setLoading(true)
-    const result = await axios.get('http://127.0.0.1:8000/Dart')
-    setData(result.data)
-    setLoading(false)
-  }
-  const handlePoints = (value) => {
-    if (value == 25 || value == 50) {
-      setPlayer1Score(player1Score - value)
-    }
-    else {
-    setPlayer1Score(player1Score - (value * multiplier))
-    }
-  }
 
   function handleThrow(value) {
     let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints
@@ -175,16 +156,16 @@ const Dart = () => {
       <div>
         <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
       </div>
-{/*
+{/* FUTURE IDEAS TO EXPLORE
       <div>
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">Play | Leaderboard</h2>
       </div>
-*/}
+
       <div>
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player1Points}</h2>
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player2Points}</h2>
       </div>
-
+*/}
       <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => setShowNewGame(true)}>New game</button>
@@ -212,7 +193,7 @@ const Dart = () => {
         ))}
         <div></div><div className="block md:hidden lg:block"></div>
         <div className="hidden lg:block"></div><div className="hidden lg:block"></div>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#22d3ee]"
+        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#09a9c9]"
         onClick={() => handleThrow(25)}>25</button>
         <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => handleThrow(50)}>50</button>
