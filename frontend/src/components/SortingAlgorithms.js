@@ -207,7 +207,11 @@ const color_3 = "#1A1A1A"
       while (i < leftArray.length) {
         array[k] = leftArray[i]
         setArray([...array])
-            
+
+        document.getElementById(k).style.backgroundColor = '#C4344F'
+        await sleep(speed);
+        document.getElementById(k).style.backgroundColor = color_3
+
         i++
         k++
       }

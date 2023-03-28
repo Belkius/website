@@ -9,8 +9,8 @@ function Dart() {
 
   const [showNewGame, setShowNewGame] = useState(false)
   const [showWonGame, setShowWonGame] = useState(false)
-  const [player1Score, setPlayer1Score] = useState(301)
-  const [player2Score, setPlayer2Score] = useState(301)
+  const [player1Score, setPlayer1Score] = useState(501)
+  const [player2Score, setPlayer2Score] = useState(501)
   const [player1Points, setPlayer1Points] = useState([])
   const [player2Points, setPlayer2Points] = useState([])
   const [player1Throws, setPlayer1Throws] = useState(3)
@@ -136,6 +136,7 @@ function Dart() {
     }if (input1Element.value) {
       setPlayer2Name(input2Element.value)
     }
+    setPlayerTurn(1)
     setPlayer1Score(Number(selectElement.value))
     setPlayer2Score(Number(selectElement.value))
     setPlayer1Points([])
@@ -202,35 +203,36 @@ function Dart() {
 
       <div className="py-12 grid grid-cols-2 place-items-center justify-between lg:grid-cols-4 gap-x-2 gap-y-4">
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              {player1Name}<br/>
-              Score: {player1Score}
+            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              {player1Name} <br/>
+            <div className="flex justify-between">Throws
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player1Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player1Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player1Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+            </div>
             </div>
           </div>
           <div className="h-24 w-48 relative bg-[#1A1A1A]">
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              Throws
-            </div>
-            <div className="flex justify-between">
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player1Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              Average: {player1Points.length > 0 && (player1Points.reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}<br/>
+              Score: {player1Score}
             </div>
           </div> 
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}>
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              {player2Name}<br/>
-              Score: {player2Score}
+            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              {player2Name}<br/>              
+            <div className="flex justify-between">
+              Throws
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player2Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player2Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
+              <div className={`h-4 w-4 ml-2 mt-3 border-2 border-white ${player2Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+            </div>
             </div>
           </div>
           <div className="h-24 w-48 relative bg-[#1A1A1A]">
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2 px-4 font-semibold">
-              Throws
-            </div>
-            <div className="flex justify-between">
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 0 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 1 ? 'bg-[#ffffff]' : ''}`}></div>
-              <div className={`h-4 w-4 mx-4 mt-3 border-2 border-white ${player2Throws > 2 ? 'bg-[#ffffff]' : ''}`}></div>
+            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              Average: {player2Points.length > 0 && (player2Points.reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}<br/>
+              Score: {player2Score}
             </div>
           </div>
       </div>
