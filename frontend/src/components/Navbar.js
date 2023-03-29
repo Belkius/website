@@ -6,11 +6,6 @@ import { useHistory } from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom'
 
 
-import Sort from "./Sort";
-import Home from './Home';
-
-
-
 function Navbar() {
   const [menu, setMenu] = useState(false)
   const [activeLink, setActiveLink] = useState('/')
@@ -53,19 +48,19 @@ function Navbar() {
                   <span className="text-2xl text-white font-semibold">Belkius</span>
               </a>
           <div className="hidden md:flex p-4 border border-none rounded-lg bg-transparent text-sm font-medium" id="navbar-pc">
-            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#fefefe]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#fefefe]' : ''}`}>
+            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
               Projects
             </NavLink>
-            <NavLink exact to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#fefefe]  hover:text-[#c4344f] ${activeLink === '/about' ? 'bg-[#c4344f] hover:text-[#fefefe]' : ''}`}>
+            <NavLink exact to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/about' ? 'bg-[#c4344f] hover:text-[#fdfefe]' : ''}`}>
               About Me
             </NavLink>
-            <NavLink to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#fefefe]  hover:text-[#22d3ee] ${activeLink === '/skills' ? 'bg-[#22d3ee] hover:text-[#fefefe]' : ''}`}>
+            <NavLink to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/skills' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
               Skills
             </NavLink>
-            <NavLink to="/info" onClick={handleLinkClick} className={`px-3 py-2 text-[#fefefe]  hover:text-[#c4344f] ${activeLink === '/info' ? 'bg-[#C4344F] hover:text-[#fefefe]' : ''}`}>
+            <NavLink to="/info" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/info' ? 'bg-[#C4344F] hover:text-[#fdfefe]' : ''}`}>
               Website Info
             </NavLink>
-            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#fefefe]  hover:text-[#22d3ee] ${activeLink === '/contact' ? 'bg-[#22d3ee] hover:text-[#fefefe]' : ''}`}>
+            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/contact' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
               Contact
             </NavLink>
           </div>

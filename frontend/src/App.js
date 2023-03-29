@@ -10,6 +10,7 @@ import Navbar from './components/Navbar';
 import Home from "./components/Home";
 import Sort from "./components/Sort";
 import Dart from './components/Dart';
+import RepCounter from './components/RepCounter';
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='*' element={<Home/>} />
         <Route path='/sort' element={<Sort/>} />
         <Route path='/dart' element={<Dart/>} />
+        <Route path='/repcounter' element={<RepCounter/>} />
       </Routes>
 
     </>

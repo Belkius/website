@@ -20,30 +20,16 @@ function Dart() {
   const [player1Name, setPlayer1Name] = useState("Player 1")
   const [player2Name, setPlayer2Name] = useState("Player 2")
   const [winner, setWinner] = useState("")
+  const points = []
 
-  const points = [
-    { label: '20', value: 20, color: "bg-[#C4344F]" },
-    { label: '19', value: 19, color: "bg-[#09a9c9]" },
-    { label: '18', value: 18, color: "bg-[#C4344F]" },
-    { label: '17', value: 17, color: "bg-[#09a9c9]" },
-    { label: '16', value: 16, color: "bg-[#C4344F]" },
-    { label: '15', value: 15, color: "bg-[#09a9c9]" },
-    { label: '14', value: 14, color: "bg-[#C4344F]" },
-    { label: '13', value: 13, color: "bg-[#09a9c9]" },
-    { label: '12', value: 12, color: "bg-[#C4344F]" },
-    { label: '11', value: 11, color: "bg-[#09a9c9]" },
-    { label: '10', value: 10, color: "bg-[#C4344F]" },
-    { label: '9', value: 9, color: "bg-[#09a9c9]" },
-    { label: '8', value: 8, color: "bg-[#C4344F]" },
-    { label: '7', value: 7, color: "bg-[#09a9c9]" },
-    { label: '6', value: 6, color: "bg-[#C4344F]" },
-    { label: '5', value: 5, color: "bg-[#09a9c9]" },
-    { label: '4', value: 4, color: "bg-[#C4344F]" },
-    { label: '3', value: 3, color: "bg-[#09a9c9]" },
-    { label: '2', value: 2, color: "bg-[#C4344F]" },
-    { label: '1', value: 1, color: "bg-[#09a9c9]" },
-    { label: 'Miss', value: 0, color: "bg-[#C4344F]" },
-  ]
+  for (let i = 20; i >= 1; i--) {
+    const label = i.toString()
+    const value = i;
+    const color = i % 2 === 0 ? "bg-[#C4344F]" : "bg-[#09a9c9]"
+    
+    points.push({ label, value, color })
+  }
+  points.push({ label: 'Miss', value: 0, color: "bg-[#C4344F]" })
 
   function handleThrow(value) {
     let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints

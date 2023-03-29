@@ -5,11 +5,6 @@ import { useHistory } from 'react-router-dom';
 import {Routes, Route} from 'react-router-dom'
 
 
-import Sort from "./Sort";
-import Dart from './Dart';
-
-
-
 
 function Home() {
   
@@ -55,7 +50,7 @@ function Home() {
         </a>
 
       
-        <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-gray-800" href="/sort">
+        <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-gray-800" href="/repcounter">
           <div className="h-72 border-b-4 border-black relative">
             <div>
               <img alt="Sorry, this image is missing." src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Threes%21_app_icon.png" className="object-fill h-72 w-72"/>
