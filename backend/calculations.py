@@ -1,6 +1,5 @@
 import random
 
-
 def generate(array, length, duplicates):
     if duplicates:
         for i in range(length):
@@ -11,7 +10,6 @@ def generate(array, length, duplicates):
         for i in range(length):
             array.append(array_temp[i])
     return array
-
 
 def swap(array, a, b):
       temp = array[a]

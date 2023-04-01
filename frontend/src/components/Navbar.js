@@ -1,9 +1,5 @@
-import React, {ReactDOM, useState, useEffect, useRef} from 'react';
-import axios from 'axios';
-import {render} from 'react-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import {Routes, Route} from 'react-router-dom'
 
 
 function Navbar() {

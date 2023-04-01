@@ -28,7 +28,9 @@ function RepCounter() {
       </div>
       {/*camera*/}
       <div className="flex w-[90%] h-[70vh] mx-auto my-auto  rounded-2xl justify-center items-center">
-        <video ref={camRef} className="max-w-[90%] border-2 border-[#09a9c9] rounded-2xl"></video>
+        <video ref={camRef} controls muted="muted" className="max-w-[90%] border-2 border-[#09a9c9] rounded-2xl">
+          <source src="http://localhost:8000/rep_counter" type="video/mp4" />
+        </video>
       </div>
     </>
   )

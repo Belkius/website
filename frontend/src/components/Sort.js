@@ -1,7 +1,5 @@
 import React, {ReactDOM, useState, useEffect} from 'react';
 import axios from 'axios';
-import {render} from 'react-dom';
-import { useHistory } from 'react-router-dom';
 import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js';
 
 

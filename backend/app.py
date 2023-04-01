@@ -35,4 +35,6 @@ async def sort(duplicates, length):
 async def dart():
     return {"another":"route"}
 
-
+@app.get("/rep_counter")
+async def rep_counter():
+    return {"another":"route"}
