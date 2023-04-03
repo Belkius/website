@@ -2,8 +2,10 @@
 import calculations
 import algorithms
 import time
-
-from fastapi import FastAPI, Request, Form, HTTPException
+import cv2
+from fastapi.responses import HTMLResponse
+from starlette.responses import StreamingResponse
+from fastapi import FastAPI, Request, Form, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -38,3 +40,27 @@ async def dart():
 @app.get("/rep_counter")
 async def rep_counter():
     return {"another":"route"}
+""" 
+class VideoCamera(object):
+    def __init__(self):
+      self.video = cv2.VideoCapture(0)
+
+    def __del__(self):
+      self.video.release()
+
+    def get_frame(self):
+      ret, frame = self.video.read()
+      ret, jpeg = cv2.imencode('.jpg', frame)
+      return jpeg.tobytes()
+
+async def video_stream(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (
+            b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n'
+        )
+
+@app.get('/video_feed')
+async def video_feed():
+    return StreamingResponse(video_stream(VideoCamera()), media_type='multipart/x-mixed-replace; boundary=frame') """

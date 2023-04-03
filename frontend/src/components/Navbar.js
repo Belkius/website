@@ -1,3 +1,4 @@
+import './Navbar.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -10,18 +11,17 @@ function Navbar() {
     setActiveLink(event.target.pathname)
   }
 
-   
-  const mouseBg = useRef(null)
+  const mouseBackground = useRef(null)
 
   const handleMouseMove = (event) => {
     const { clientX, clientY } = event
 
-    mouseBg.current.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`,
+    mouseBackground.current.animate({
+        left: `${clientX/2}px`,
+        top: `${clientY/2}px`,
       }, { duration: 12000, fill: 'forwards' }
     )
-  };
+  }
 
   useEffect(() => {
     window.addEventListener('pointermove', handleMouseMove)
@@ -29,16 +29,16 @@ function Navbar() {
 
   return (
     <>
-        <div >
-          <div className="absolute hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[1000px] w-[1000px] left-1/2 top-1/2 rounded-full"   
-            ref={mouseBg} 
-            style={{zIndex: -1, animation: 'rotation 10s infinite linear', transform: 'translate(-50%, -50%)' }} 
+        <div>
+          <div className="absolute hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[1000px] w-[1000px] left-1/2 top-1/2 rounded-full mouse-background"   
+            ref={mouseBackground} 
+            style={{zIndex: -1 }} 
             onPointerMove={handleMouseMove}>
           </div>
         </div>
 
         <nav>
-          <div className="flex items-center justify-between px-4 py-2 ">
+          <div className="flex items-center justify-between px-4 py-2">
               <a href="/" className="no-underline flex items-center mx-2 md:mx-10 p-3 px-4">
                   <img src="logo192.png" className="mr-3 h-9" alt="Logo" />
                   <span className="text-2xl text-white font-semibold">Belkius</span>

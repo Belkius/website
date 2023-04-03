@@ -152,25 +152,25 @@ function Dart() {
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player2Points}</h2>
       </div>
 */}
-      <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-4">
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
+      <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-2 md:my-4">
+        <button className="h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-1 px-1 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => setShowNewGame(true)}>New game</button>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
+        <button className="h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => undo()}>Undo</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(1)}>x1</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(2)}>x2</button>
-        <button className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 3 ? 'border-[#C4344F]' : 'border-transparent'}`}
+        <button className={`h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 border-4 rounded-md text-white font-medium bg-[#1A1A1A] ${multiplier === 3 ? 'border-[#C4344F]' : 'border-transparent'}`}
         onClick={() => setMultiplier(3)}>x3</button>
       </div>
       <div className="border-2 border-[#1f1f1f] rounded-xl mx-5 lg:mx-16"></div>
 
-      <div className="grid grid-cols-5 place-items-center justify-evenly md:grid-cols-6 lg:grid-cols-9 gap-4 mx-10 my-4">
+      <div className="grid grid-cols-5 place-items-center justify-evenly md:grid-cols-6 lg:grid-cols-9 gap-4 mx-10 my-2 md:my-4">
         {points.map((button) => (
           <button
             key={button.label}
-            className={`h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium ${button.color}`}
+            className={`h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium ${button.color}`}
             onClick={() => handleThrow(button.value)}
           >
             {button.label}
@@ -179,14 +179,14 @@ function Dart() {
         ))}
         <div></div><div className="block md:hidden lg:block"></div>
         <div className="hidden lg:block"></div><div className="hidden lg:block"></div>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#09a9c9]"
+        <button className="h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#09a9c9]"
         onClick={() => handleThrow(25)}>25</button>
-        <button className="h-16 w-16 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
+        <button className="h-14 w-14 md:h-24 md:w-24 lg:h-32 lg:w-32 py-2 px-2 rounded-md text-white font-medium bg-[#C4344F]"
         onClick={() => handleThrow(50)}>50</button>
       </div>
 
 
-      <div className="py-12 grid grid-cols-2 place-items-center justify-between lg:grid-cols-4 gap-x-2 gap-y-4">
+      <div className="py-2 md:py-12 grid grid-cols-2 place-items-center justify-between lg:grid-cols-4 gap-x-2 gap-y-4">
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
               {player1Name} <br/>
@@ -197,7 +197,7 @@ function Dart() {
             </div>
             </div>
           </div>
-          <div className="h-24 w-48 relative bg-[#1A1A1A]">
+          <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
               Average: {player1Points.length > 0 && (player1Points.reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}<br/>
               Score: {player1Score}
@@ -214,7 +214,7 @@ function Dart() {
             </div>
             </div>
           </div>
-          <div className="h-24 w-48 relative bg-[#1A1A1A]">
+          <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
               Average: {player2Points.length > 0 && (player2Points.reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}<br/>
               Score: {player2Score}
