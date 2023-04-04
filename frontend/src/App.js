@@ -13,9 +13,6 @@ import RepCounter from './components/RepCounter';
 
 
 function App() {
-  
-
-
   return (
     <>
 
@@ -31,5 +28,4 @@ function App() {
     </>
   );
 }
-
 export default App;

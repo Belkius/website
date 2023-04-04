@@ -3,9 +3,13 @@ import calculations
 import algorithms
 import time
 import cv2
+import numpy as np
+import base64
+
+from pydantic import BaseModel
 from fastapi.responses import HTMLResponse
 from starlette.responses import StreamingResponse
-from fastapi import FastAPI, Request, Form, HTTPException, Response
+from fastapi import FastAPI, Request, Form, HTTPException, Response, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -64,3 +68,23 @@ async def video_stream(camera):
 @app.get('/video_feed')
 async def video_feed():
     return StreamingResponse(video_stream(VideoCamera()), media_type='multipart/x-mixed-replace; boundary=frame') """
+
+class CamData(BaseModel):
+    width: int
+    height: int
+    data: dict
+
+@app.post("/process_cam_data")
+async def process_cam_data(cam_data: CamData):
+    # process the received data here
+    # for example, you can access the width, height, and data fields of cam_data
+    print(cam_data.width, cam_data.height)
+    print(list(cam_data.data.items()))
+    """ # convert the received data to a NumPy array
+    img_array = np.array(cam_data.data, dtype=np.uint8).reshape((cam_data.height, cam_data.width, 3))
+    # convert the NumPy array to an OpenCV image
+    img = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+    # save the image as a JPG file
+    cv2.imwrite("cam_image.jpg", img) """
+    # return a response
+    return {"message": "Cam data processed successfully"}
