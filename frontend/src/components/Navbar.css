@@ -1,0 +1,16 @@
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  50%{
+    scale: 1 1.5;
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.mouse-background {
+  animation: rotation 120s infinite linear;
+  transform:  translateY(50%), translateX(50%);
+}

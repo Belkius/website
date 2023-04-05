@@ -1,4 +1,4 @@
-import React, {ReactDOM, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js';
 
@@ -6,8 +6,8 @@ import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSor
 
 function Sort (){
 
-  const color_1 = "#0BC823"
-  const color_2 = "#C4344F"
+  //const color_1 = "#0BC823"
+  //const color_2 = "#C4344F"
   const color_3 = "#1A1A1A"
 
   const [array, setArray] = useState([])

@@ -16,7 +16,7 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125" href="/sort">
           <div className="h-72 relative">
             <div>
-              <img alt="Sorry, this image is missing." src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi5Vw8Wz33E7GN1UxXm26y-KMaDfYlYPLXdQ&usqp=CAU" className="object-fill h-72 w-72"/>
+              <img alt="SORTING" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi5Vw8Wz33E7GN1UxXm26y-KMaDfYlYPLXdQ&usqp=CAU" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
@@ -33,7 +33,7 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-[#1A1A1A]" href="/dart">
           <div className="h-72 border-b-4 border-black relative">
             <div>
-              <img alt="Sorry, this image is missing." src="https://media.istockphoto.com/id/168718452/pl/zdj%C4%99cie/dart-na-celu.jpg?s=612x612&w=0&k=20&c=bvBKt1OGDlir8sdtd_RDVyb-DurapGoGTfEoh3OL9zw=" className="object-fill h-72 w-72"/>
+              <img alt="DART" src="https://media.istockphoto.com/id/168718452/pl/zdj%C4%99cie/dart-na-celu.jpg?s=612x612&w=0&k=20&c=bvBKt1OGDlir8sdtd_RDVyb-DurapGoGTfEoh3OL9zw=" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
@@ -50,12 +50,12 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-gray-800" href="/repcounter">
           <div className="h-72 border-b-4 border-black relative">
             <div>
-              <img alt="Sorry, this image is missing." src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Threes%21_app_icon.png" className="object-fill h-72 w-72"/>
+              <img alt="PULL UP" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Threes%21_app_icon.png" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-4 px-4 font-semibold">
-              Third panel
+              Pull up counter
             </div>
             <div className="text-lg text-white p-4 group-hover:text-[#C4344F] font-light">
               This is a third panel used to go to the third page.
