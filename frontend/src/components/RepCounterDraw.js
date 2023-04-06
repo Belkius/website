@@ -14,8 +14,9 @@
  * limitations under the License.
  * =============================================================================
  */
-import * as posenet from "@tensorflow-models/posenet";
-import * as tf from "@tensorflow/tfjs";
+import * as poseDetection from '@tensorflow-models/pose-detection';
+import * as tf from '@tensorflow/tfjs-core';
+import '@tensorflow/tfjs-backend-webgl';
 
 const color = "#C4344F";
 const lineWidth = 2;
@@ -44,11 +45,36 @@ export function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
   ctx.stroke();
 }
 
+drawSkeleton(keypoints, poseId) {
+  // Each poseId is mapped to a color in the color palette.
+  const color = 'red';
+  this.ctx.fillStyle = color;
+  this.ctx.strokeStyle = color;
+  this.ctx.lineWidth = 2;
+
+  posedetection.util.getAdjacentPairs(params.STATE.model).forEach(([i, j]) => {
+    const kp1 = keypoints[i];
+    const kp2 = keypoints[j];
+
+    // If score is null, just show the keypoint.
+    const score1 = kp1.score != null ? kp1.score : 1;
+    const score2 = kp2.score != null ? kp2.score : 1;
+    const scoreThreshold = params.STATE.modelConfig.scoreThreshold || 0;
+
+    if (score1 >= scoreThreshold && score2 >= scoreThreshold) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(kp1.x, kp1.y);
+      this.ctx.lineTo(kp2.x, kp2.y);
+      this.ctx.stroke();
+    }
+  });
+}
+
 /**
  * Draws a pose skeleton by looking up all adjacent keypoints/joints
- */
-export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
-  const adjacentKeyPoints = posenet.getAdjacentKeyPoints(
+*/
+ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+  const adjacentKeyPoints = poseDetection.util.getAdjacentKeyPoints(
     keypoints,
     minConfidence
   );
@@ -62,7 +88,7 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
       ctx
     );
   });
-}
+}  
 
 /**
  * Draw pose keypoints onto a canvas
@@ -70,12 +96,11 @@ export function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
 export function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
-
     if (keypoint.score < minConfidence) {
       continue;
     }
-
-    const { y, x } = keypoint.position;
+    const x = keypoint.x;
+    const y = keypoint.y;
     drawPoint(ctx, y * scale, x * scale, 3, color);
   }
 }

@@ -1,60 +1,57 @@
 import React, { useRef, useEffect, useState } from 'react';
-import * as tf from "@tensorflow/tfjs";
-import * as pn from "@tensorflow-models/posenet";
-import Webcam from "react-webcam";
+import * as poseDetection from '@tensorflow-models/pose-detection';
+import * as tf from '@tensorflow/tfjs-core';
+import '@tensorflow/tfjs-backend-webgl';
 import { drawKeypoints, drawSkeleton } from './RepCounterDraw';
 
-function RepCounter() {
+  
+
+
+ function RepCounter() {
   const camRef = useRef(null)
   const canvasRef = useRef(null)
-  const [camShow, setCamShow] = useState(true)
-
-  function record() {
-    startPosenet()
-    setCamShow(true)
-  }
+  const [camShow, setCamShow] = useState(false)
 
   function stop() {
     setCamShow(false)
   }
 
-  //posenet
-  async function startPosenet (){
-    const net = await pn.load({
-      inputResolution:{width:640, height:480},
-      scale: 0.5
-    })
-    setInterval(()=>{
-      detector(net)
-    }, 100)
+  async function record() {
+    // Get access to the webcam
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+  
+    // Display the webcam data in the video element
+    camRef.current.srcObject = stream
+    camRef.current.play()
+  
+    // Start pose detection
+    //startPosenet()
+    setCamShow(true)
   }
 
-  async function detector(net){
-    if(typeof camRef.current !== "undefined" && camRef.current !== null && camRef.current.video.readyState===4 ){
-      const camFeed = camRef.current.video
-      const camWidth = camRef.current.video.videoWidth
-      const camHeight = camRef.current.video.videoHeight
+  async function detection (){
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const video = camRef.current;
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
 
-      camRef.current.video.width = camRef.current.video.videoWidth
-      camRef.current.video.height = camRef.current.video.videoHeight
+    const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING};
+    const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig);
 
-      const signlePose = await net.estimateSinglePose(camFeed)
+    const poses = await detector.estimatePoses(video);
+    
+    canvasRef.current.width = videoWidth
+    canvasRef.current.height = videoHeight
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // add a square to the canvas
 
-      updateCanvas(signlePose, camFeed, camWidth, camHeight, canvasRef)
-    }
+    poses.forEach(({keypoints}) => {
+      console.log(keypoints)
+      drawKeypoints(keypoints, 0.4, ctx);
+      drawSkeleton(keypoints, 0.7, ctx);
+    }) 
   }
-//do i need video in this function???
-  async function updateCanvas(pose, video, camWidth, camHeight, canvas){
-    const ctx = canvas.current.getContext("2d")
-    canvas.current.width = camWidth
-    canvas.current.height = camHeight
-
-    drawKeypoints(pose['keypoints'], 0.5, ctx)
-    drawSkeleton(pose['keypoints'], 0.5, ctx)
-
-  }
-
-  startPosenet()
 
   return (
     <>
@@ -64,8 +61,8 @@ function RepCounter() {
         </h1>
       </div>
       <div className={`flex w-[90%] h-[70vh] mx-auto my-auto  rounded-2xl justify-center items-center ${camShow ? 'visible' : 'invisible'}`}>
-        <Webcam ref={camRef} className='max-w-[90%] border-2 border-[#09a9c9] rounded-2xl'/>
-        <canvas ref={canvasRef} className='absolute max-w-[90%] rounded-2xl' />
+        <video id="video" ref={camRef} className="flex max-w-[90%] border-2 border-[#22d3ee] rounded-2xl" playsInline autoPlay/>
+        <canvas id="canvas" ref={canvasRef} className="absolute max-w-[90%] rounded-2xl" />
       </div>
       <div className="flex block items-center justify-center mx-2 my-1">
         <button className="btn btn-outline-primary p-3 mx-4 rounded-full bg-[#C4344F] font-semibold text-white" onClick={record}>
@@ -73,6 +70,8 @@ function RepCounter() {
         </button>
         <button className="btn btn-outline-primary p-3 mx-4 rounded-full bg-[#C4344F] font-semibold text-white" onClick={stop}>
           Stop Camera
+        </button><button className="btn btn-outline-primary p-3 mx-4 rounded-full bg-[#C4344F] font-semibold text-white" onClick={() => detection()}>
+          akcja
         </button>
       </div>
     </>
