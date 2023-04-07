@@ -32,7 +32,7 @@ function Dart() {
 
   function handleThrow(value) {
     let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints
-
+    
     if (playerTurn === 1) {
       currentPlayer = player1Score
       setScore = setPlayer1Score
@@ -84,6 +84,16 @@ function Dart() {
     if (throws === 1) {
       setOponnentThrows(3)
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
+    }
+    
+    if (value === 0) {
+      const gif = document.getElementById("miss-gif")
+      const audio = new Audio('dog_laugh.mp3')
+      gif.style.display = "block"
+      audio.play()
+      setTimeout(() => {
+        gif.style.display = "none"
+      }, 2000);
     }
   }
 
@@ -239,6 +249,10 @@ function Dart() {
           winner={winner}
           onCancel={handleCancel}
         />
+      </div>
+      
+      <div id='miss-gif' style={{display: 'none', position: 'fixed', top: '50%', left: '50%', zIndex: '999', transform: 'translate(-50%, -50%) scale(4)',}}>
+          <img src="dog_laugh.gif" alt="missed throw" />
       </div>
     </>
   );
