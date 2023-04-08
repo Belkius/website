@@ -14,11 +14,11 @@ body {
   padding: 0;
   height: 100%;
 }
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
   body {
     overflow: hidden;
   }
-}
+} */
 @keyframes rotation {
   from {
     transform: rotate(0deg), translateY(50%), translateX(50%);

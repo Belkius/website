@@ -12,6 +12,7 @@ function Dart() {
   const [player2Score, setPlayer2Score] = useState(501)
   const [player1Points, setPlayer1Points] = useState([])
   const [player2Points, setPlayer2Points] = useState([])
+  const [roundPoints, setRoundPoints] = useState([])
   const [player1Throws, setPlayer1Throws] = useState(3)
   const [player2Throws, setPlayer2Throws] = useState(3)
   const [multiplier, setMultiplier] = useState(1)
@@ -52,11 +53,13 @@ function Dart() {
     
     if (value === 25 || value === 50) {
       newScore = currentPlayer - value
+      setRoundPoints(playerPoints => [...playerPoints, value])
     } 
     else {
       newScore = currentPlayer - value * multiplier
+      setRoundPoints(playerPoints => [...playerPoints, value * multiplier])
     }
-
+console.log(roundPoints)
     if (value === 25 || value === 50) {
       setPoints(playerPoints => [...playerPoints, value])
     } 
@@ -76,6 +79,7 @@ function Dart() {
     else{
       setThrows(0)
       setOponnentThrows(3)
+      setRoundPoints([])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
       return
     }
@@ -83,9 +87,12 @@ function Dart() {
     setThrows(throws - 1)
     if (throws === 1) {
       setOponnentThrows(3)
+      setRoundPoints([])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
     }
     
+    setMultiplier(1)
+
     if (value === 0) {
       const gif = document.getElementById("miss-gif")
       const audio = new Audio('dog_laugh.mp3')
@@ -99,7 +106,7 @@ function Dart() {
 
   function undo(){
     let updatedPlayerTurn = playerTurn
-    if (player1Points.length ===0 && player2Points.length === 0) return
+    if (player1Points.length === 0 && player2Points.length === 0) return
     if (playerTurn === 1 && player1Throws === 3){
       updatedPlayerTurn = 2
       setPlayerTurn(2)
@@ -136,6 +143,7 @@ function Dart() {
     setPlayer2Score(Number(selectElement.value))
     setPlayer1Points([])
     setPlayer2Points([])
+    setRoundPoints([])
     setPlayer1Throws(3)
     setPlayer2Throws(3)
     setShowNewGame(false)
@@ -146,11 +154,12 @@ function Dart() {
     setShowNewGame(false)
     setShowWonGame(false)
   }
+  
 
   return (
     <>
       <div>
-        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
+        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard {roundPoints}</h1>
       </div>
 {/* FUTURE IDEAS TO EXPLORE
       <div>

@@ -14,7 +14,9 @@ function Navbar() {
   const mouseBackground = useRef(null)
 
   const handleMouseMove = (event) => {
-    const { clientX, clientY } = event
+    let { clientX, clientY } = event
+    if(clientX > window.innerWidth){clientX = window.innerWidth}
+    if(clientY > window.innerHeight - 800){clientY = window.innerHeight - 800}
 
     mouseBackground.current.animate({
         left: `${clientX/2}px`,
@@ -29,8 +31,8 @@ function Navbar() {
 
   return (
     <>
-        <div>
-          <div className="absolute hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[1000px] w-[1000px] left-1/2 top-1/2 rounded-full mouse-background"   
+        <div className='overflow-hidden'>
+          <div className="absolute hidden overflow-hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[800px] w-[800px] left-1/2 top-1/2 rounded-full mouse-background"   
             ref={mouseBackground} 
             style={{zIndex: -1 }} 
             onPointerMove={handleMouseMove}>
