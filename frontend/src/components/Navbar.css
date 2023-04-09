@@ -4,7 +4,7 @@
     transform: rotate(0deg);
   }
   50%{
-    scale: 1 1.5;
+    scale: 1 0.75;
   }
   to {
     transform: rotate(360deg);

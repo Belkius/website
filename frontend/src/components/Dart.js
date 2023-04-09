@@ -31,9 +31,9 @@ function Dart() {
   }
   points.push({ label: 'Miss', value: 0, color: "bg-[#C4344F]" })
 
-  function handleThrow(value) {
+  async function handleThrow(value) {
     let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints
-    
+    let currentRoundPoints = roundPoints
     if (playerTurn === 1) {
       currentPlayer = player1Score
       setScore = setPlayer1Score
@@ -53,44 +53,52 @@ function Dart() {
     
     if (value === 25 || value === 50) {
       newScore = currentPlayer - value
-      setRoundPoints(playerPoints => [...playerPoints, value])
+      currentRoundPoints = currentRoundPoints.concat(value)
     } 
     else {
       newScore = currentPlayer - value * multiplier
-      setRoundPoints(playerPoints => [...playerPoints, value * multiplier])
+      currentRoundPoints = currentRoundPoints.concat(value * multiplier)
     }
-console.log(roundPoints)
-    if (value === 25 || value === 50) {
-      setPoints(playerPoints => [...playerPoints, value])
-    } 
-    else {
-      setPoints(playerPoints => [...playerPoints, value * multiplier])
-    }
-
+   // console.log(roundPoints.length)
+   // console.log(player1Points)
+    
     if (newScore > 1){
       setScore(newScore)
+      console.log(currentRoundPoints.length)
+      console.log(player1Points)
+      if (currentRoundPoints.length === 3) setPoints(playerPoints => [...playerPoints, currentRoundPoints])
     } 
     else if( newScore === 0 && multiplier === 2){
       setScore(newScore)
+      setPoints(playerPoints => [...playerPoints, currentRoundPoints])
       if (playerTurn === 1) setWinner(player1Name)
-      if (playerTurn === 2) setWinner(player2Name)
+      else if (playerTurn === 2) setWinner(player2Name)
       setShowWonGame(true)
     }
     else{
       setThrows(0)
       setOponnentThrows(3)
+      newScore = currentPlayer
+      roundPoints.forEach(point => {
+        newScore = newScore + point         
+      })
+      setScore(newScore)
       setRoundPoints([])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
       return
     }
     
     setThrows(throws - 1)
+
     if (throws === 1) {
       setOponnentThrows(3)
       setRoundPoints([])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
     }
-    
+    else{
+      setRoundPoints(currentRoundPoints)
+    }
+
     setMultiplier(1)
 
     if (value === 0) {
@@ -103,7 +111,7 @@ console.log(roundPoints)
       }, 2000);
     }
   }
-
+//fix needed
   function undo(){
     let updatedPlayerTurn = playerTurn
     if (player1Points.length === 0 && player2Points.length === 0) return
@@ -218,7 +226,7 @@ console.log(roundPoints)
           </div>
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
-              Average: {player1Points.length > 0 && (player1Points.reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}<br/>
+              Average: {player1Points.length > 0 && (player1Points.flat().reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}<br/>
               Score: {player1Score}
             </div>
           </div> 
@@ -235,7 +243,7 @@ console.log(roundPoints)
           </div>
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}>
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
-              Average: {player2Points.length > 0 && (player2Points.reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}<br/>
+              Average: {player2Points.length > 0 && (player2Points.flat().reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}<br/>
               Score: {player2Score}
             </div>
           </div>

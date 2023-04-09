@@ -16,7 +16,7 @@ function Navbar() {
   const handleMouseMove = (event) => {
     let { clientX, clientY } = event
     if(clientX > window.innerWidth){clientX = window.innerWidth}
-    if(clientY > window.innerHeight - 800){clientY = window.innerHeight - 800}
+    if(clientY > window.innerHeight - 640){clientY = window.innerHeight - 640}
 
     mouseBackground.current.animate({
         left: `${clientX/2}px`,
@@ -32,7 +32,7 @@ function Navbar() {
   return (
     <>
         <div className='overflow-hidden'>
-          <div className="absolute hidden overflow-hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[800px] w-[800px] left-1/2 top-1/2 rounded-full mouse-background"   
+          <div className="absolute hidden overflow-hidden lg:block blur-3xl opacity-30 bg-gradient-to-r from-[#C4344F] to-[#22d3ee] h-[700px] w-[700px] left-1/2 top-1/2 rounded-full mouse-background"   
             ref={mouseBackground} 
             style={{zIndex: -1 }} 
             onPointerMove={handleMouseMove}>
@@ -46,19 +46,19 @@ function Navbar() {
                   <span className="text-2xl text-white font-semibold">Belkius</span>
               </a>
           <div className="hidden md:flex p-4 border border-none rounded-lg bg-transparent text-sm font-medium" id="navbar-pc">
-            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#fdfdfe]' : ''}`}>
               Projects
             </NavLink>
-            <NavLink exact to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/about' ? 'bg-[#c4344f] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink exact to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/about' ? 'bg-[#c4344f] hover:text-[#fdfdfe]' : ''}`}>
               About Me
             </NavLink>
-            <NavLink to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/skills' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/skills' ? 'bg-[#22d3ee] hover:text-[#fdfdfe]' : ''}`}>
               Skills
             </NavLink>
-            <NavLink to="/info" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/info' ? 'bg-[#C4344F] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink to="/info" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/info' ? 'bg-[#C4344F] hover:text-[#fdfdfe]' : ''}`}>
               Website Info
             </NavLink>
-            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/contact' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/contact' ? 'bg-[#22d3ee] hover:text-[#fdfdfe]' : ''}`}>
               Contact
             </NavLink>
           </div>
