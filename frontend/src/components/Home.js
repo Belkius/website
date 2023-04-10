@@ -16,7 +16,7 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125" href="/sort">
           <div className="h-72 relative">
             <div>
-              <img alt="SORTING" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi5Vw8Wz33E7GN1UxXm26y-KMaDfYlYPLXdQ&usqp=CAU" className="object-fill h-72 w-72"/>
+              <img alt="SORTING" src="sort.jpg" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
@@ -33,7 +33,7 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-[#1A1A1A]" href="/dart">
           <div className="h-72 border-b-4 border-black relative">
             <div>
-              <img alt="DART" src="https://media.istockphoto.com/id/168718452/pl/zdj%C4%99cie/dart-na-celu.jpg?s=612x612&w=0&k=20&c=bvBKt1OGDlir8sdtd_RDVyb-DurapGoGTfEoh3OL9zw=" className="object-fill h-72 w-72"/>
+              <img alt="DART" src="dart.jpg" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
@@ -50,7 +50,7 @@ function Home() {
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 hover:scale-125 hover:bg-gray-800" href="/repcounter">
           <div className="h-72 border-b-4 border-black relative">
             <div>
-              <img alt="PULL UP" src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Threes%21_app_icon.png" className="object-fill h-72 w-72"/>
+              <img alt="PULL UP" src="pull_up.jpg" className="object-fill h-72 w-72"/>
             </div>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">

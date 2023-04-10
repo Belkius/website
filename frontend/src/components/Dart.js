@@ -17,6 +17,7 @@ function Dart() {
   const [player2Throws, setPlayer2Throws] = useState(3)
   const [multiplier, setMultiplier] = useState(1)
   const [playerTurn, setPlayerTurn] = useState(1)
+  const [bust, setBust] = useState(false)
   const [player1Name, setPlayer1Name] = useState("Player 1")
   const [player2Name, setPlayer2Name] = useState("Player 2")
   const [winner, setWinner] = useState("")
@@ -51,6 +52,8 @@ function Dart() {
       setPoints = setPlayer2Points
     }
     
+    if (currentPlayer === 0) return
+
     if (value === 25 || value === 50) {
       newScore = currentPlayer - value
       currentRoundPoints = currentRoundPoints.concat(value)
@@ -59,14 +62,11 @@ function Dart() {
       newScore = currentPlayer - value * multiplier
       currentRoundPoints = currentRoundPoints.concat(value * multiplier)
     }
-   // console.log(roundPoints.length)
-   // console.log(player1Points)
     
     if (newScore > 1){
       setScore(newScore)
-      console.log(currentRoundPoints.length)
-      console.log(player1Points)
       if (currentRoundPoints.length === 3) setPoints(playerPoints => [...playerPoints, currentRoundPoints])
+      setBust(false)
     } 
     else if( newScore === 0 && multiplier === 2){
       setScore(newScore)
@@ -84,6 +84,7 @@ function Dart() {
       })
       setScore(newScore)
       setRoundPoints([])
+      setBust(true)
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
       return
     }
@@ -111,30 +112,59 @@ function Dart() {
       }, 2000);
     }
   }
-//fix needed
+
   function undo(){
+    if (player1Points.length === 0 && player2Points.length === 0 && roundPoints.length === 0) return
+
     let updatedPlayerTurn = playerTurn
-    if (player1Points.length === 0 && player2Points.length === 0) return
+    let currentRoundPoints = roundPoints
+
     if (playerTurn === 1 && player1Throws === 3){
       updatedPlayerTurn = 2
       setPlayerTurn(2)
-      setPlayer2Throws(1)
+      if (bust) {
+        setBust(false)
+        setPlayer2Throws(3)
+        setRoundPoints([])
+        return
+      }
+      else{
+        setPlayer2Throws(1)
+      }
     }
     else if(playerTurn === 2 && player2Throws === 3){
       updatedPlayerTurn = 1
       setPlayerTurn(1)
-      setPlayer1Throws(1)
+      if (bust) {
+        setBust(false)
+        setPlayer1Throws(3)
+        setRoundPoints([])
+        return
+      }
+      else{
+        setPlayer1Throws(1)
+      }
     }
+    
     if (updatedPlayerTurn === 1){
       if (player1Throws < 3) setPlayer1Throws(player1Throws + 1)
-      setPlayer1Score(player1Score + player1Points[player1Points.length - 1])
-      setPlayer1Points(player1Points.slice(0, player1Points.length - 1))
+      if (currentRoundPoints.length === 0) {
+        currentRoundPoints = player1Points[player1Points.length - 1]
+        setPlayer1Points(player1Points.slice(0, -1))
+      }
+      setPlayer1Score(player1Score + currentRoundPoints[currentRoundPoints.length - 1])
     } 
     else if (updatedPlayerTurn === 2) {
       if (player2Throws < 3) setPlayer2Throws(player2Throws + 1)
-      setPlayer2Score(player2Score + player2Points[player2Points.length - 1])
-      setPlayer2Points(player2Points.slice(0, player2Points.length - 1))
+      if (currentRoundPoints.length === 0) {
+        currentRoundPoints = player2Points[player2Points.length - 1]
+        setPlayer2Points(player2Points.slice(0, -1))
+      }
+      setPlayer2Score(player2Score + currentRoundPoints[currentRoundPoints.length - 1])
     }
+    
+    currentRoundPoints = currentRoundPoints.slice(0, -1)
+    setRoundPoints(currentRoundPoints)
   }
 
   const handleStart = () => {
@@ -154,11 +184,11 @@ function Dart() {
     setRoundPoints([])
     setPlayer1Throws(3)
     setPlayer2Throws(3)
+    setBust(false)
     setShowNewGame(false)
   }
 
   const handleCancel = () => {
-    console.log('Cancelled')
     setShowNewGame(false)
     setShowWonGame(false)
   }
@@ -167,16 +197,11 @@ function Dart() {
   return (
     <>
       <div>
-        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard {roundPoints}</h1>
+        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
       </div>
 {/* FUTURE IDEAS TO EXPLORE
       <div>
         <h2 className="text-center font-semibold text-xl text-white mb-6 ">Play | Leaderboard</h2>
-      </div>
-
-      <div>
-        <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player1Points}</h2>
-        <h2 className="text-center font-semibold text-xl text-white mb-6 ">{player2Points}</h2>
       </div>
 */}
       <div className="grid grid-cols-5 place-items-center justify-between gap-4 mx-10 my-2 md:my-4">
@@ -225,8 +250,8 @@ function Dart() {
             </div>
           </div>
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 1 ? 'border-[#C4344F]' : 'border-transparent'}`}>
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
-              Average: {player1Points.length > 0 && (player1Points.flat().reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}<br/>
+            <div className="block font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              Average: <span className="text-xl"> {player1Points.length > 0 && (player1Points.flat().reduce((a, b) => a + b, 0) / player1Points.length).toFixed(1)}</span><br/>
               Score: {player1Score}
             </div>
           </div> 
@@ -242,8 +267,8 @@ function Dart() {
             </div>
           </div>
           <div className={`h-24 w-48 relative border-4 bg-[#1A1A1A] ${playerTurn === 2 ? 'border-[#C4344F]' : 'border-transparent'}`}>
-            <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
-              Average: {player2Points.length > 0 && (player2Points.flat().reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}<br/>
+            <div className="block font-primary text-white group-hover:text-[#C4344F] text-2xl pt-2.5 px-4 font-semibold">
+              Average: <span className="text-xl">{player2Points.length > 0 && (player2Points.flat().filter(point => typeof point === 'number').reduce((a, b) => a + b, 0) / player2Points.length).toFixed(1)}</span><br/>
               Score: {player2Score}
             </div>
           </div>
