@@ -31,10 +31,3 @@ async def sort(duplicates, length):
     calculations.generate(array, int(length), dupli)
     return array
 
-@app.get("/dart")
-async def dart():
-    return {"another":"route"}
-
-@app.get("/rep_counter")
-async def rep_counter():
-    return {"another":"route"}

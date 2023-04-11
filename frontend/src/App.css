@@ -6,8 +6,13 @@
   text-align: center;
   margin: 0;
   padding: 0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Chivo Mono';
 }
+/* @layer base {
+  html {
+    font-family:   "Lucida", monospace;
+  }
+} */
 body {
   background-color: black;
   margin: 0;

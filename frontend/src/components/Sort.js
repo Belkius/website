@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from 'react';
-import axios from 'axios';
 import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js';
 
 
@@ -41,15 +40,38 @@ function Sort (){
     setAlgorithm(event.target.value)
   } 
 
-  async function fetchData() {
+/*   async function fetchData() {
     const result = await axios.get('http://127.0.0.1:8000/sort', {params: {duplicates: duplicates, length: arrayLength}})
     setArray(result.data)
     for (let i = 0; i < array.length; i++) {
       let bar = document.getElementById(i).style
       bar.backgroundColor = color_3
     }
+  } */
+  async function fetchArray() {
+    let newArray = []
+    
+    for (let i = 0; i < arrayLength; i++) {
+      let indexValue = duplicates ? Math.floor(Math.random() * (arrayLength) + 1) : i + 1
+      newArray.push(indexValue)
+    }
+
+    if (!duplicates) {
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]]
+      }
+    }
+
+    setArray(newArray)
+
+    for (let i = 0; i < newArray.length -1; i++) {
+      let bar = document.getElementById(i).style
+      bar.backgroundColor = color_3
+    }
   }
-  async function sortData() {
+
+  async function sortArray() {
     setButtonBlock(true)
 
     if (algorithm === "bubbleSort"){
@@ -81,7 +103,7 @@ function Sort (){
   }
 
   useEffect(() => {
-    fetchData()
+    fetchArray()
   }, [])
 
   return (
@@ -118,8 +140,8 @@ function Sort (){
 
 
         <div className="block items-center justify-between mx-2 my-6">
-          <button className="btn btn-outline-primary p-2 mx-2 rounded-full bg-[#C4344F] font-semibold text-white" onClick={fetchData} disabled={buttonBlock}>New array</button>
-          <button className="btn btn-outline-primary p-2 mx-2 rounded-full bg-[#C4344F] font-semibold text-white" onClick={sortData} disabled={buttonBlock}>Sort array</button>
+          <button className="btn btn-outline-primary p-2 mx-2 rounded-full bg-[#C4344F] font-semibold text-white" onClick={fetchArray} disabled={buttonBlock}>New array</button>
+          <button className="btn btn-outline-primary p-2 mx-2 rounded-full bg-[#C4344F] font-semibold text-white" onClick={sortArray} disabled={buttonBlock}>Sort array</button>
         </div>
       </div>
 
