@@ -12,9 +12,7 @@ function Home() {
         
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 md:hover:scale-125" href="/sort">
           <div className="h-72 relative">
-            <div>
-              <img alt="SORTING" src="sort.jpg" className="object-fill h-72 w-72"/>
-            </div>
+            <img alt="SORTING" src="sort.jpg" className="object-fill h-72 w-72"/>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-4 px-4 font-semibold">
@@ -29,9 +27,7 @@ function Home() {
 
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 md:hover:scale-125" href="/dart">
           <div className="h-72 border-b-4 border-black relative">
-            <div>
-              <img alt="DART" src="dart.jpg" className="object-fill h-72 w-72"/>
-            </div>
+            <img alt="DART" src="dart.jpg" className="object-fill h-72 w-72"/>
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
             <div className="font-primary text-white group-hover:text-[#22d3ee] text-2xl pt-4 px-4 font-semibold">
@@ -46,9 +42,7 @@ function Home() {
       
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] transition duration-500 md:hover:scale-125" href="/repcounter">
           <div className="h-72 border-b-4 border-black relative">
-            <div>
-              <img alt="PULL UP" src="pull_up.jpg" className="object-fill h-72 w-72"/>
-            </div>
+           <img alt="PULL UP" src="pull_up.jpg" className="object-fill h-72 w-72"/> 
           </div>
           <div className="h-56 relative bg-[#1A1A1A]">
             <div className="font-primary text-white group-hover:text-[#C4344F] text-2xl pt-4 px-4 font-semibold">
