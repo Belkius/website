@@ -1,29 +1,25 @@
-import React from 'react';
+import React from 'react'
 
 function About() {
   
   return (
     <>
-      <div className="flex py-12 mx-16 md:mx-24 lg:mx-48 grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+      <div className="flex py-12 mx-16 md:mx-24 lg:mx-48 md:my-8 grid grid-cols-1 lg:grid-cols-2 place-content-center place-items-center gap-4">
         <div className="w-[100%] lg:order-2 bg-[#1A1A1A] bg-opacity-80 ">
           <p className="font-primary text-white text-2xl pt-4 px-4 font-semibold">
             Who am I?
           </p>
-          <p className="text-lg text-white p-4 font-light">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Suspendisse malesuada, justo at convallis posuere, neque erat congue quam, id hendrerit dolor odio eget quam. 
-            Aenean ut hendrerit nulla. 
-            Donec interdum, mauris sit amet sollicitudin consectetur, lectus mi lobortis nisi, ac congue velit sapien vel ex. 
-            Fusce faucibus libero ac velit finibus, eget commodo tortor malesuada. Proin malesuada commodo purus in elementum. 
-            Sed sed sagittis ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-            Sed at velit quis tellus bibendum consectetur. 
-            Duis dictum, mauris non luctus bibendum, odio diam tincidunt ex, ac gravida dolor enim ut nulla. Nulla facilisi. 
-            Nunc ac nulla nibh. Vivamus ac imperdiet elit.
+          <p className="md:text-lg text-white p-4 font-light text-justify">
+            Hi, my name is Greg Belkius. That's me in the picture (on the right). 
+            I'm an automation and robotics engineer from Poland who is passionate about data science, AI, and programming in general.
+            More recently, I have also been trying my hand at 3D animation to visualize some of the data I work with in the future.
+            When I'm not sitting at the computer, I like to stay active by lifting weights at the gym or taking my dog for a walk.
+            Besides that I enjoy playing all sorts of tabletop games and doing anything sounding like fun.
           </p>
         </div>
 
         <div className="lg:order-1">
-          <img alt="Creators photograph" src="portfolio_1.gif" className="opacity-60 object-none border-4 border-[#22d3ee] rounded-2xl"/>
+          <img alt="Creators photograph" src="portfolio.gif" className="opacity-60 object-none border-4 border-[#22d3ee] rounded-2xl"/>
         </div>
       </div>
     </>

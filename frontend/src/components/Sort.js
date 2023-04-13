@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js';
+import React, { useState, useEffect} from 'react'
+import { bubbleSort, selectionSort, quickSort, heapSort, insertionSort, mergeSort, shellSort, pancakeSort, finishedAnimation } from './SortingAlgorithms.js'
 
 
 

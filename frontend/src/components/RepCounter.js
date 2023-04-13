@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react';
-import * as poseDetection from '@tensorflow-models/pose-detection';
-import * as tf from '@tensorflow/tfjs-core';
-import '@tensorflow/tfjs-backend-webgl';
-import { drawKeypoints, drawSkeleton } from './RepCounterDraw';
+import React, { useRef, useEffect, useState } from 'react'
+import * as poseDetection from '@tensorflow-models/pose-detection'
+import * as tf from '@tensorflow/tfjs-core'
+import '@tensorflow/tfjs-backend-webgl'
+import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
 
   
 
@@ -50,12 +50,10 @@ import { drawKeypoints, drawSkeleton } from './RepCounterDraw';
         const isDown = detectDownPosition(keypoints, 0.4)
         if (isDown === true && currentPosition === 1) {
           currentPosition = 0
-          console.log("--------------------")
           setPosition(0)
         }
         const isUp = detectUpPosition(keypoints, 0.4)
         if (isUp === true && currentPosition === 0) {
-          console.log("++++++++++++++++++++++")
           currentPosition = 1
           reps += 1
           setPosition(1)

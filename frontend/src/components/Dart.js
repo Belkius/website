@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import  { NewGameWindow, WinGameWindow } from './DartComponents';
+import React, { useState } from 'react'
+import  { NewGameWindow, WinGameWindow } from './DartComponents'
 
 
 
