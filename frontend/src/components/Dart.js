@@ -17,7 +17,7 @@ function Dart() {
   const [player2Throws, setPlayer2Throws] = useState(3)
   const [multiplier, setMultiplier] = useState(1)
   const [playerTurn, setPlayerTurn] = useState(1)
-  const [bust, setBust] = useState(false)
+  const [bust, setBust] = useState([])
   const [player1Name, setPlayer1Name] = useState("Player 1")
   const [player2Name, setPlayer2Name] = useState("Player 2")
   const [winner, setWinner] = useState("")
@@ -35,6 +35,7 @@ function Dart() {
   async function handleThrow(value) {
     let currentPlayer, setScore, throws, setThrows, setOponnentThrows, newScore, setPoints
     let currentRoundPoints = roundPoints
+
     if (playerTurn === 1) {
       currentPlayer = player1Score
       setScore = setPlayer1Score
@@ -66,7 +67,6 @@ function Dart() {
     if (newScore > 1){
       setScore(newScore)
       if (currentRoundPoints.length === 3) setPoints(playerPoints => [...playerPoints, currentRoundPoints])
-      setBust(false)
     } 
     else if( newScore === 0 && multiplier === 2){
       setScore(newScore)
@@ -84,24 +84,24 @@ function Dart() {
       })
       setScore(newScore)
       setRoundPoints([])
-      setBust(true)
+      setBust(bust => [...bust, true])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
       return
     }
     
     setThrows(throws - 1)
+    setMultiplier(1)
 
     if (throws === 1) {
       setOponnentThrows(3)
       setRoundPoints([])
       setPlayerTurn(playerTurn === 1 ? 2 : 1)
+      setBust(bust => [...bust, false])
     }
     else{
       setRoundPoints(currentRoundPoints)
     }
-
-    setMultiplier(1)
-
+    console.log(bust)
     if (value === 0) {
       const gif = document.getElementById("miss-gif")
       const audio = new Audio('dog_laugh.mp3')
@@ -116,14 +116,16 @@ function Dart() {
   function undo(){
     if (player1Points.length === 0 && player2Points.length === 0 && roundPoints.length === 0) return
 
+    let wasBust = bust[bust.length - 1]
     let updatedPlayerTurn = playerTurn
     let currentRoundPoints = roundPoints
+
+    setBust(bust.slice(0, -1))
 
     if (playerTurn === 1 && player1Throws === 3){
       updatedPlayerTurn = 2
       setPlayerTurn(2)
-      if (bust) {
-        setBust(false)
+      if (wasBust) {
         setPlayer2Throws(3)
         setRoundPoints([])
         return
@@ -135,8 +137,7 @@ function Dart() {
     else if(playerTurn === 2 && player2Throws === 3){
       updatedPlayerTurn = 1
       setPlayerTurn(1)
-      if (bust) {
-        setBust(false)
+      if (wasBust) {
         setPlayer1Throws(3)
         setRoundPoints([])
         return
@@ -184,7 +185,7 @@ function Dart() {
     setRoundPoints([])
     setPlayer1Throws(3)
     setPlayer2Throws(3)
-    setBust(false)
+    setBust([])
     setShowNewGame(false)
   }
 
