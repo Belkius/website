@@ -198,7 +198,7 @@ function Dart() {
   return (
     <>
       <div>
-        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
+        <h1 className="font-primary font-semibold text-2xl lg:text-4xl text-center text-white mb-2 md:py-6">Dart Scoreboard</h1>
       </div>
 {/* FUTURE IDEAS TO EXPLORE
       <div>

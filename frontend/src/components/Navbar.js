@@ -42,19 +42,19 @@ function Navbar() {
           <div className="flex items-center justify-between px-4 py-2">
               <a href="/" className="no-underline flex items-center mx-2 md:mx-10 p-3 px-4">
                   <img src="mlokologo.svg" className="mr-3 h-9" alt="Logo" />
-                  <span className="text-2xl text-white font-semibold">Belkius</span>
+                  <span className="text-regular md:text-2xl text-white font-semibold">Belkius</span>
               </a>
           <div className="hidden md:flex p-4 border border-none rounded-lg bg-transparent text-sm font-medium" id="navbar-pc">
-            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink exact to="/" onClick={handleLinkClick} className={`px-3 py-2 text-[#ffffff]  hover:text-[#22d3ee] ${activeLink === '/' ? 'bg-[#22d3ee] hover:text-[#ffffff]' : ''}`}>
               Projects
             </NavLink>
-            <NavLink exact to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/skills' ? 'bg-[#c4344f] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink exact to="/skills" onClick={handleLinkClick} className={`px-3 py-2 text-[#ffffff]  hover:text-[#c4344f] ${activeLink === '/skills' ? 'bg-[#c4344f] hover:text-[#ffffff]' : ''}`}>
               Skillset
             </NavLink>
-            <NavLink to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#22d3ee] ${activeLink === '/about' ? 'bg-[#22d3ee] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink to="/about" onClick={handleLinkClick} className={`px-3 py-2 text-[#ffffff]  hover:text-[#22d3ee] ${activeLink === '/about' ? 'bg-[#22d3ee] hover:text-[#ffffff]' : ''}`}>
               About me
             </NavLink>
-            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#fdfefe]  hover:text-[#c4344f] ${activeLink === '/contact' ? 'bg-[#c4344f] hover:text-[#fdfefe]' : ''}`}>
+            <NavLink to="/contact" onClick={handleLinkClick} className={`px-3 py-2 text-[#ffffff]  hover:text-[#c4344f] ${activeLink === '/contact' ? 'bg-[#c4344f] hover:text-[#ffffff]' : ''}`}>
               Contact
             </NavLink>
           </div>

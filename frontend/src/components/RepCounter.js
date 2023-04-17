@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import * as poseDetection from '@tensorflow-models/pose-detection'
 import * as tf from '@tensorflow/tfjs-core'
 import '@tensorflow/tfjs-backend-webgl'
@@ -118,7 +118,7 @@ import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
   return (
     <>
       <div>
-        <h1 className="font-primary font-semibold text-2xl lg:text-5xl text-center text-white mb-2 md:py-6">
+        <h1 className="font-primary font-semibold text-2xl lg:text-4xl text-center text-white mb-2 md:py-6">
           Pull Up Counter
         </h1>
       </div>   

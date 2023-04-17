@@ -14,7 +14,7 @@ function About() {
             I'm an automation and robotics engineer from Poland who is passionate about data science, AI, and programming in general.
             More recently, I have also been trying my hand at 3D animation to visualize some of the data I work with in the future.
             When I'm not sitting at the computer, I like to stay active by lifting weights at the gym or taking my dog for a walk.
-            Besides that I enjoy playing all sorts of tabletop games and doing anything sounding like fun.
+            Besides that I enjoy playing all sorts of tabletop games and doing anything that sounds like fun.
           </p>
         </div>
 

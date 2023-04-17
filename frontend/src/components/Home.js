@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       <div>
-        <h1 className="font-primary font-semibold text-4xl lg:text-5xl text-center text-white mt-6 md:mt-16 md:py-6">Example projects</h1>
+        <h1 className="font-primary font-semibold text-4xl lg:text-5xl text-center text-white mt-6 md:mt-16 md:py-6">Some of my projects</h1>
       </div>
           
       <div className="py-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
