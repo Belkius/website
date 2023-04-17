@@ -33,7 +33,7 @@ function Skills() {
               <img src={process.env.PUBLIC_URL + '/logos/Python.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
               <img src={process.env.PUBLIC_URL + '/logos/numpy.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
               <img src={process.env.PUBLIC_URL + '/logos/tensorflow.png'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
-              <img src={process.env.PUBLIC_URL + '/logos/scikit_learn.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
+              <img src={process.env.PUBLIC_URL + '/logos/scikit.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
               <img src={process.env.PUBLIC_URL + '/logos/pandas.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
               <img src={process.env.PUBLIC_URL + '/logos/fastapi.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
               <img src={process.env.PUBLIC_URL + '/logos/C++.svg'} className="h-16 w-16 object-contain md:grayscale hover:grayscale-0"/>
