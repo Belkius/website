@@ -4,11 +4,11 @@ function Home() {
   
   return (
     <>
-      <div>
+    {/*<div>
         <h1 className="font-primary font-semibold text-4xl lg:text-5xl text-center text-white mt-6 md:mt-16 md:py-6">Some of my projects</h1>
-      </div>
+      </div> */}
           
-      <div className="py-12 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
+      <div className="py-12 max-w-6xl mx-auto md:my-32 grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-8">
         
         <a className="group no-underline h-120 w-72 mx-auto bg-[#1A1A1A] bg-opacity-80 transition duration-500 md:hover:scale-125" href="/sort">
           <div className="h-72 relative">

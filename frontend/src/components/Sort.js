@@ -108,7 +108,7 @@ function Sort (){
 
   return (
     <div className="App list-group-item block mx-auto" >
-      <h1 className="card text-2xl text-white bg-primary m-4 w-7/8">Sorting algorithms visualization</h1>
+      <h1 className="card text-2xl md:text-4xl text-white bg-primary m-4 w-7/8">Sorting algorithms visualization</h1>
       <div className="card-body block mx-auto justify-between w-7/8"> 
         <div className="flex justify-center mx-auto w-5/6">
           <label htmlFor="array-length" className="block w-full m-4 px-3 py-2 bg-transparent text-sm text-white font-bold shadow-sm mb-3" disabled>
