@@ -122,7 +122,7 @@ import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
           Pull Up Counter
         </h1>
       </div>   
-      <div className={`flex md:hidden py-4 grid grid-cols-2 place-items-center justify-between gap-x-2 ${camShow ? 'visible' : 'invisible'}`}>
+      <div className={`flex md:hidden py-4 grid grid-cols-2 place-items-center justify-between gap-x-2 ${camShow ? 'block' : 'hidden'}`}>
         <div className="h-14 w-24 py-1 px-1 rounded-md text-center text-white font-medium text-sm lg:text-2xl bg-[#C4344F]">
           <p>Position:{position}</p>
           <p>{position === 0 ? 'Down' : 'Up'}</p>
@@ -132,7 +132,7 @@ import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
           <p>{repCount}</p>
         </div>
       </div>
-      <div className={`flex w-[90%] h-[70vh] mx-auto my-auto  rounded-2xl justify-center items-center ${camShow ? 'visible' : 'invisible'}`}>
+      <div className={`flex w-[90%] h-[70vh] mx-auto my-auto  rounded-2xl justify-center items-center ${camShow ? 'block' : 'hidden'}`}>
         <div className="hidden md:block h-16 w-24 lg:h-20 lg:w-32 py-1 px-1 rounded-md text-center text-white font-medium text-sm lg:text-2xl bg-[#C4344F]">
           <p>Position:</p>
           <p>{position === 0 ? 'Down' : 'Up'}</p>

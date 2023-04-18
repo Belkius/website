@@ -53,7 +53,7 @@ function Skills() {
 
         <div className={`${education ? 'h-full ' :  'h-16'} w-full bg-[#1A1A1A] bg-opacity-80`}>
           <button className="w-full font-primary text-2xl text-[#22d3ee] text-left p-4 font-semibold col-span-2 md:col-span-3" onClick={() => setEducation(!education)}>
-            Education & proficiencies
+            Education
             <a className='float-right'>
               &#10534; 
             </a>
@@ -80,26 +80,20 @@ function Skills() {
               <br/>Major: Automation and Robotics
               <br/>Specialization: Industrial Automation
               <br/>Title: Engineer
-            </p>
-            <p className="md:text-lg font-light underline underline-offset-2	text-justify">
-              Languages
-            </p>
-            <p className="md:text-lg font-light text-justify col-span-2">
-              Polish - Native
-              <br/>English - Proficient
-            </p>
-            <p className="md:text-lg font-light underline underline-offset-2	text-justify">
-              Other
-            </p>
-            <p className="md:text-lg font-light text-justify col-span-2">
-              Drivers License
+              <br/>Thesis:&nbsp; 
+              <a href="./praca_inz_belkius_grzegorz.pdf" className="italic" target="_blank">
+                Solving mathematical problems with the usage of artificial intelligence systems &nbsp;
+              </a>
+              <a className="text-[#22d3ee] text-xl">
+                &#8599; 
+              </a>
             </p>
           </div>
         </div>
 
         <div className={`${experience ? 'h-full ' :  'h-16'} w-full bg-[#1A1A1A] bg-opacity-80`}>
           <button className="w-full font-primary text-2xl text-[#C4344F] text-left p-4 font-semibold col-span-2 md:col-span-3" onClick={() => setExperience(!experience)}>
-            Experience
+            Experience, etc.
             <a className='float-right'>
               &#10534; 
             </a>
@@ -126,6 +120,13 @@ function Skills() {
               <br/>- PLC programming with the use of TIA Portal for Siemens controllers and Automation Studio for B&R controllers;
               <br/>- preparation of industrial automation projects;
               <br/>- setup and programming of Fanuc and ABB industrial robots;
+            </p>
+            <p className="md:text-lg font-light underline underline-offset-2	text-justify">
+              Languages
+            </p>
+            <p className="md:text-lg font-light text-justify col-span-2">
+              Polish - Native
+              <br/>English - Proficient
             </p>
           </div>
         </div>
