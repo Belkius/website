@@ -111,7 +111,7 @@ function Skills() {
               <br/>- programming Fanuc industrial robots;
             </p>
             <p className="md:text-lg font-light underline underline-offset-2	text-justify">
-              02 Jan - 31 Mar
+              02 Jan - 31 Mar 2023
             </p>
             <p className="md:text-lg font-light text-justify col-span-2">
               <a className="font-bold">
