@@ -4,7 +4,7 @@ This is my personal portfolio website, built using React, Python, and FastAPI. T
 
 ## Demo
 You can find the website hosted on my home server here: 
-[belkius.com](belkius.com)
+[belkius.com](https://belkius.com/)
 
 ## Technologies Used
 - HTML
