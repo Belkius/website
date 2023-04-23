@@ -21,7 +21,7 @@ You can find the website hosted on my home server here:
 3. [Pull up counter with AI](https://github.com/Belkius/pull_up_counter) - Count pull up repetitions during your exercise, using data from your webcam and a TensorFlow pose detection model.
 
 ## Contact Me
-Email: [gbelkius@gmail.com](mailto:gbelkius@gmail.com)
+Email: [gbelkius@gmail.com](mailto:gbelkius@gmail.com)  
 GitHub: https://github.com/Belkius
 
 
