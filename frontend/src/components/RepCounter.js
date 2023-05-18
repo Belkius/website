@@ -4,9 +4,6 @@ import * as tf from '@tensorflow/tfjs-core'
 import '@tensorflow/tfjs-backend-webgl'
 import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
 
-  
-
-
  function RepCounter() {
   const camRef = useRef(null)
   const canvasRef = useRef(null)
@@ -32,7 +29,8 @@ import { drawKeypoints, drawSkeleton } from './RepCounterDraw'
     const videoHeight = video.videoHeight
     let currentPosition = 0
     let reps = 0
-
+    
+    await tf.ready()
     const detectorConfig = {modelType: poseDetection.movenet.modelType.SINGLEPOSE_LIGHTNING}
     const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet, detectorConfig)
     
