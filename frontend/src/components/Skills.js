@@ -100,17 +100,6 @@ function Skills() {
           </button>
           <div className={`${experience ? 'block' : 'hidden'} grid p-4 grid-cols-1 md:grid-cols-3 gap-y-4`}>
             <p className="md:text-lg font-light underline underline-offset-2	text-justify">
-              27 July - 21 Aug 2020
-            </p>
-            <p className="md:text-lg font-light text-justify col-span-2">
-              <a className="font-bold">
-                Sunex Sp. z o.o. - intern
-              </a>
-              <br/>- preparation of CNC projects;
-              <br/>- automation of industrial processes;
-              <br/>- programming Fanuc industrial robots;
-            </p>
-            <p className="md:text-lg font-light underline underline-offset-2	text-justify">
               02 Jan - 31 Mar 2023
             </p>
             <p className="md:text-lg font-light text-justify col-span-2">
@@ -120,6 +109,18 @@ function Skills() {
               <br/>- PLC programming with the use of TIA Portal for Siemens controllers and Automation Studio for B&R controllers;
               <br/>- preparation of industrial automation projects;
               <br/>- setup and programming of Fanuc and ABB industrial robots;
+            </p>
+            <p className="md:text-lg font-light underline underline-offset-2	text-justify">
+              01 Jul 2023 - present
+            </p>
+            <p className="md:text-lg font-light text-justify col-span-2">
+              <a className="font-bold">
+                Centralny Ośrodek Informatyki - internship in the database management field
+              </a>
+              <br/>- working with the Oracle database structure in the SQL Developer environment;
+              <br/>- creating SQL queries for data analysis;
+              <br/>- preparation of PL/SQL procedures for processes automation;
+              <br/>- managing regular expressions, CSV files, XML files, and XSL schemas;
             </p>
             <p className="md:text-lg font-light underline underline-offset-2	text-justify">
               Languages
