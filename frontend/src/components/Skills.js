@@ -115,12 +115,12 @@ function Skills() {
             </p>
             <p className="md:text-lg font-light text-justify col-span-2">
               <a className="font-bold">
-                Centralny Ośrodek Informatyki - internship in the database management field
+                Centralny Ośrodek Informatyki - database management intern
               </a>
-              <br/>- working with the Oracle database structure in the SQL Developer environment;
-              <br/>- creating SQL queries for data analysis;
-              <br/>- preparation of PL/SQL procedures for processes automation;
-              <br/>- managing regular expressions, CSV files, XML files, and XSL schemas;
+              <br/>- working with Oracle database structure within SQL Developer environment;
+              <br/>- developing SQL queries for data analysis;
+              <br/>- preparation of PL/SQL procedures for process automation;
+              <br/>- management of various data formats, including regular expressions, CSV files, XML files, and XSL schemas;
             </p>
             <p className="md:text-lg font-light underline underline-offset-2	text-justify">
               Languages
